@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  
+  body {
+    @apply font-sans antialiased bg-jucepe-surface text-gray-800;
+  }
+}
+
+@layer components {
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-300 
+           transition-all duration-200 rounded-lg hover:bg-jucepe-primary/50 
+           hover:text-white cursor-pointer;
+  }
+  
+  .sidebar-item.active {
+    @apply bg-jucepe-primary text-white;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-hover hover:-translate-y-1;
+  }
+  
+  .btn-primary {
+    @apply px-4 py-2 bg-jucepe-secondary text-white rounded-lg font-medium
+           hover:bg-jucepe-primary transition-colors duration-200 
+           focus:outline-none focus:ring-2 focus:ring-jucepe-secondary focus:ring-offset-2;
+  }
+  
+  .section-title {
+    @apply text-lg font-semibold text-gray-800 flex items-center justify-between;
+  }
+}
