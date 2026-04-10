@@ -2,6 +2,7 @@ import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { BarChart3, Activity, CheckCircle, Eye } from 'lucide-react';
 import { monitoringData, chartData } from '../../data/mockData.js';
+import { Link } from 'react-router-dom';
 
 const MonitoringWidget = () => {
   return (
@@ -9,10 +10,15 @@ const MonitoringWidget = () => {
       {/* Header */}
       <div className="flex items-center justify-between p-5 border-b border-gray-100">
         <h2 className="section-title">Monitoramento & Dados</h2>
-        <button className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1">
+
+        {/* Trocamos o button pelo Link apontando para /monitoramento */}
+        <Link
+          to="/monitoramento"
+          className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1 transition-colors"
+        >
           Ver painel
           <Eye className="w-4 h-4" />
-        </button>
+        </Link>
       </div>
 
       <div className="p-5">
@@ -23,9 +29,9 @@ const MonitoringWidget = () => {
               <BarChart3 className="w-4 h-4 text-blue-600" />
               <h3 className="text-sm font-semibold text-gray-700">Controle Interno (Power BI)</h3>
             </div>
-            
+
             <p className="text-xs text-gray-500 mb-3">Métricas do mês atual</p>
-            
+
             {/* Metrics Grid */}
             <div className="grid grid-cols-2 gap-3 mb-4">
               <div className="bg-gray-50 rounded-lg p-3">
@@ -51,37 +57,37 @@ const MonitoringWidget = () => {
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                  <XAxis 
-                    dataKey="name" 
+                  <XAxis
+                    dataKey="name"
                     tick={{ fontSize: 10 }}
                     axisLine={false}
                     tickLine={false}
                   />
-                  <YAxis 
+                  <YAxis
                     tick={{ fontSize: 10 }}
                     axisLine={false}
                     tickLine={false}
                   />
-                  <Tooltip 
-                    contentStyle={{ 
-                      backgroundColor: '#fff', 
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#fff',
                       border: '1px solid #e5e7eb',
                       borderRadius: '8px',
                       fontSize: '12px'
                     }}
                   />
-                  <Line 
-                    type="monotone" 
-                    dataKey="users" 
-                    stroke="#2563eb" 
+                  <Line
+                    type="monotone"
+                    dataKey="users"
+                    stroke="#2563eb"
                     strokeWidth={2}
                     dot={{ fill: '#2563eb', strokeWidth: 0, r: 3 }}
                     activeDot={{ r: 5 }}
                   />
-                  <Line 
-                    type="monotone" 
-                    dataKey="sessions" 
-                    stroke="#22c55e" 
+                  <Line
+                    type="monotone"
+                    dataKey="sessions"
+                    stroke="#22c55e"
                     strokeWidth={2}
                     dot={{ fill: '#22c55e', strokeWidth: 0, r: 3 }}
                     activeDot={{ r: 5 }}
@@ -97,7 +103,7 @@ const MonitoringWidget = () => {
               <Activity className="w-4 h-4 text-green-600" />
               <h3 className="text-sm font-semibold text-gray-700">Módulo de Monitoramento Zabbix</h3>
             </div>
-            
+
             <div className="flex items-center gap-2 mb-4">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -129,11 +135,11 @@ const MonitoringWidget = () => {
                 <div className="absolute inset-4 rounded-full bg-white shadow-inner flex flex-col items-center justify-center">
                   <CheckCircle className="w-8 h-8 text-green-500 mb-1" />
                   <p className="text-xs font-semibold text-gray-600 text-center leading-tight">
-                    Servidor<br/>Servidor<br/>OK
+                    Servidor<br />Servidor<br />OK
                   </p>
                 </div>
               </div>
-              
+
               <div className="mt-6 text-center">
                 <p className="text-sm font-medium text-gray-700">{monitoringData.serverName}</p>
                 <p className="text-xs text-gray-500 mt-1">Última verificação: há 2 minutos</p>
