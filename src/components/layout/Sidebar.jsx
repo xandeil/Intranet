@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { NavLink, useLocation } from 'react-router-dom';
 import { 
   Home, 
@@ -47,9 +48,14 @@ const Sidebar = ({ isOpen }) => {
   return (
     <aside className="fixed left-0 top-0 h-full w-64 bg-jucepe-dark text-white overflow-y-auto z-50 shadow-xl flex flex-col">
       {/* Logo Area */}
-      <div className="h-16 flex items-center px-6 bg-jucepe-primary border-b border-blue-800 flex-shrink-0">
-        <span className="text-xl font-bold tracking-wider text-white">JUCEPE</span>
-      </div>
+<div className="h-16 flex items-center px-6 bg-jucepe-primary border-b border-blue-800 flex-shrink-0">
+  <Link 
+    to="/" 
+    className="text-xl font-bold tracking-wider text-white hover:opacity-80 transition-opacity cursor-pointer"
+  >
+    JUCEPE
+  </Link>
+</div>
 
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-2 overflow-y-auto">

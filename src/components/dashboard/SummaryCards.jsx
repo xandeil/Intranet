@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // 1. Importar o Link
 import { FileText, Calendar, TrendingUp, Newspaper } from 'lucide-react';
 import { summaryData } from '../../data/mockData.js';
 
@@ -16,6 +17,14 @@ const colors = {
   news: 'bg-cyan-50 text-cyan-600'
 };
 
+// 2. Definir os caminhos baseados nas suas rotas do App.jsx
+const paths = {
+  documents: '/documentos',
+  schedules: '/cronogramas',
+  accesses: '/relatorios',
+  news: '/publicacoes'
+};
+
 const SummaryCards = () => {
   const cards = [
     { key: 'documents', title: 'Documentos', data: summaryData.documents },
@@ -29,11 +38,14 @@ const SummaryCards = () => {
       {cards.map((card) => {
         const IconComponent = icons[card.key];
         const colorClass = colors[card.key];
+        const targetPath = paths[card.key]; // Pega o caminho correto
         
         return (
-          <div 
+          /* 3. Trocar 'div' por 'Link' e adicionar o 'to' */
+          <Link 
             key={card.key}
-            className="bg-white rounded-xl p-5 shadow-card card-hover cursor-pointer border border-gray-100"
+            to={targetPath}
+            className="bg-white rounded-xl p-5 shadow-card card-hover cursor-pointer border border-gray-100 block transition-all hover:shadow-md hover:border-blue-200"
           >
             <div className="flex items-start justify-between">
               <div className={`p-3 rounded-lg ${colorClass}`}>
@@ -51,7 +63,7 @@ const SummaryCards = () => {
               <p className="text-sm font-semibold text-gray-700 mt-1">{card.title}</p>
               <p className="text-xs text-gray-500 mt-1">{card.data.description}</p>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { publications } from '../../data/mockData.js';
+import { Link } from 'react-router-dom';
 
 const ContentFeed = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -21,15 +22,20 @@ const ContentFeed = () => {
   );
 
   return (
-    <div className="bg-white rounded-xl shadow-card border border-gray-100 overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-between p-5 border-b border-gray-100">
-        <h2 className="section-title">Publicações de Conteúdo</h2>
-        <button className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1">
-          Ver todas
-          <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
+<div className="bg-white rounded-xl shadow-card border border-gray-100 overflow-hidden">
+  {/* Header */}
+  <div className="flex items-center justify-between p-5 border-b border-gray-100">
+    <h2 className="section-title">Publicações de Conteúdo</h2>
+    
+    {/* Trocamos o button pelo Link para funcionar a navegação */}
+    <Link 
+      to="/publicacoes" 
+      className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1 transition-colors"
+    >
+      Ver todas
+      <ChevronRight className="w-4 h-4" />
+    </Link>
+  </div>
 
       {/* Content */}
       <div className="p-5">

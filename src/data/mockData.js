@@ -94,36 +94,36 @@ export const quickAccessItems = [
 ];
 
 export const recentActivities = [
-  { 
-    id: 1, 
-    type: 'document', 
+  {
+    id: 1,
+    type: 'document',
     title: 'Novo documento publicado: Relatório Mensal - Maio/2024',
     author: 'Maria Silva',
     time: 'Há 1 hora',
     icon: 'FileText',
     color: 'bg-blue-100 text-blue-600'
   },
-  { 
-    id: 2, 
-    type: 'schedule', 
+  {
+    id: 2,
+    type: 'schedule',
     title: 'Cronograma atualizado: Reunião de Diretoria',
     author: 'João Santos',
     time: 'Há 3 horas',
     icon: 'Calendar',
     color: 'bg-green-100 text-green-600'
   },
-  { 
-    id: 3, 
-    type: 'birthday', 
+  {
+    id: 3,
+    type: 'birthday',
     title: 'Novo aniversariante cadastrado: Carlos Lima',
     author: 'Ana Souza',
     time: 'Há 5 horas',
     icon: 'Gift',
     color: 'bg-pink-100 text-pink-600'
   },
-  { 
-    id: 4, 
-    type: 'news', 
+  {
+    id: 4,
+    type: 'news',
     title: 'Notícia publicada: JUCEPE lança novo portal',
     author: 'Redação',
     time: 'Ontem',
