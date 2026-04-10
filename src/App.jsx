@@ -5,27 +5,40 @@ import { useAuth } from './context/AuthContext.jsx';
 // Layouts
 import Layout from './components/layout/Layout.jsx';
 
-// Pages
-import Login from './pages/Login.jsx';
+// --- Páginas Base (Raiz de /pages) ---
 import Dashboard from './pages/Dashboard.jsx';
-import Documents from './pages/Documents.jsx';
-import Publications from './pages/Publications.jsx';
-import Admin from './pages/Admin.jsx';
-import NotFound from './pages/NotFound.jsx';
 
-// New Pages
+// --- Autenticação e Erros ---
+import Login from './pages/auth/Login.jsx';
+import NotFound from './pages/errors/NotFound.jsx';
+
+// --- RH & Comunicação ---
 import Aniversariantes from './pages/rh/Aniversariantes.jsx';
-import Publicar from './pages/administracao/Publicar.jsx';
+import Cronogramas from './pages/rh/Cronogramas.jsx';
+import Contato from './pages/comunicacao/Contato.jsx';
+import Publications from './pages/comunicacao/Publications.jsx';
+
+// --- Documentos ---
+import Documents from './pages/documentos/Documents.jsx';
+
+// --- Sistemas Internos ---
 import SistemasLinks from './pages/sistemas/SistemasLinks.jsx';
-import Cronogramas from './pages/Cronogramas.jsx';
-import Contato from './pages/Contato.jsx';
-import PowerBI from './pages/PowerBI.jsx';
-import Monitoramento from './pages/Monitoramento.jsx';
-import Relatorios from './pages/Relatorios.jsx';
-import PontoOnline from './pages/PontoOnline.jsx';
-import Timesheet from './pages/Timesheet.jsx';
-import Profile from './pages/Profile.jsx';
-import SettingsPage from './pages/SettingsPage.jsx';
+import Monitoramento from './pages/sistemas/Monitoramento.jsx';
+import PowerBI from './pages/sistemas/PowerBI.jsx';
+
+// --- Relatórios ---
+import Relatorios from './pages/relatorios/Relatorios.jsx';
+import PontoOnline from './pages/relatorios/PontoOnline.jsx';
+import Timesheet from './pages/relatorios/Timesheet.jsx';
+
+// Pasta Perfil (Ajustado de 'user' para 'perfil')
+import Profile from './pages/perfil/Profile.jsx';
+import SettingsPage from './pages/perfil/SettingsPage.jsx';
+
+// --- Administração ---
+import Admin from './pages/administracao/Admin.jsx';
+import Publicar from './pages/administracao/Publicar.jsx';
+
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {

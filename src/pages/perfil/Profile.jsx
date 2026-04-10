@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, Mail, Building, Shield } from 'lucide-react';
-import { userData } from '../data/mockData';
+import { userData } from '../../data/mockData';
 
 export default function Profile() {
   return (
