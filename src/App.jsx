@@ -13,6 +13,18 @@ import Publications from './pages/Publications.jsx';
 import Admin from './pages/Admin.jsx';
 import NotFound from './pages/NotFound.jsx';
 
+// New Pages
+import Aniversariantes from './pages/rh/Aniversariantes.jsx';
+import Publicar from './pages/administracao/Publicar.jsx';
+import SistemasLinks from './pages/sistemas/SistemasLinks.jsx';
+import Cronogramas from './pages/Cronogramas.jsx';
+import Contato from './pages/Contato.jsx';
+import PowerBI from './pages/PowerBI.jsx';
+import Monitoramento from './pages/Monitoramento.jsx';
+import Relatorios from './pages/Relatorios.jsx';
+import PontoOnline from './pages/PontoOnline.jsx';
+import Timesheet from './pages/Timesheet.jsx';
+
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -45,19 +57,31 @@ function App() {
         }
       >
         <Route index element={<Dashboard />} />
+        
+        {/* Navegação Principal */}
         <Route path="documentos" element={<Documents />} />
         <Route path="publicacoes" element={<Publications />} />
+        <Route path="contato" element={<Contato />} />
+        
+        {/* RH & Comunicação */}
+        <Route path="presidente" element={<Cronogramas />} />
+        <Route path="aniversariantes" element={<Aniversariantes />} />
+        <Route path="cronogramas" element={<Cronogramas />} />
+        
+        {/* Sistemas Internos */}
+        <Route path="sistemas" element={<SistemasLinks />} />
+        <Route path="sistemas/links" element={<SistemasLinks />} />
+        <Route path="powerbi" element={<PowerBI />} />
+        <Route path="monitoramento" element={<Monitoramento />} />
+        
+        {/* Relatórios */}
+        <Route path="relatorios" element={<Relatorios />} />
+        <Route path="ponto" element={<PontoOnline />} />
+        <Route path="timesheet" element={<Timesheet />} />
+        
+        {/* Administração */}
         <Route path="admin" element={<Admin />} />
-        <Route path="contato" element={<div className="p-8 text-center text-gray-500">Página de Contato em desenvolvimento</div>} />
-        <Route path="presidente" element={<div className="p-8 text-center text-gray-500">Agenda do Presidente em desenvolvimento</div>} />
-        <Route path="aniversariantes" element={<div className="p-8 text-center text-gray-500">Lista de Aniversariantes em desenvolvimento</div>} />
-        <Route path="cronogramas" element={<div className="p-8 text-center text-gray-500">Cronogramas em desenvolvimento</div>} />
-        <Route path="sistemas" element={<div className="p-8 text-center text-gray-500">Sistemas Internos em desenvolvimento</div>} />
-        <Route path="powerbi" element={<div className="p-8 text-center text-gray-500">Power BI em desenvolvimento</div>} />
-        <Route path="monitoramento" element={<div className="p-8 text-center text-gray-500">Monitoramento Zabbix em desenvolvimento</div>} />
-        <Route path="relatorios" element={<div className="p-8 text-center text-gray-500">Relatórios em desenvolvimento</div>} />
-        <Route path="ponto" element={<div className="p-8 text-center text-gray-500">Ponto Online em desenvolvimento</div>} />
-        <Route path="timesheet" element={<div className="p-8 text-center text-gray-500">Timesheet em desenvolvimento</div>} />
+        <Route path="administracao/publicar" element={<Publicar />} />
       </Route>
       
       {/* 404 */}
