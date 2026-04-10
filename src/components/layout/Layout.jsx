@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar.jsx';
 import Header from './Header.jsx';
+import MensagemModal from './MensagemModal.jsx';
 
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -22,7 +23,7 @@ const Layout = () => {
         <main className="flex-1 p-6 overflow-auto">
           <Outlet />
         </main>
-        
+        <MensagemModal />
         {/* Footer */}
         <footer className="bg-white border-t border-gray-200 py-4 px-6">
           <div className="flex justify-between items-center text-sm text-gray-500">
