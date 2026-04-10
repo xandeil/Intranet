@@ -10,32 +10,34 @@ import ImportantLinks from '../components/dashboard/ImportantLinks.jsx';
 const Dashboard = () => {
   return (
     <div className="space-y-6">
-      {/* Summary Cards */}
+      {/* Cartões de Resumo */}
       <SummaryCards />
 
-      {/* Main Grid */}
+      {/* Grid Principal */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column - Content Feed */}
+        {/* Coluna da Esquerda - Feed de Conteúdo */}
         <div className="lg:col-span-2 space-y-6">
           <ContentFeed />
           
-          {/* Monitoring Section */}
+          {/* Seção de Monitoramento */}
           <MonitoringWidget />
         </div>
 
-        {/* Right Column - Widgets */}
+        {/* Coluna da Direita - Widgets */}
         <div className="space-y-6">
           <RHSocialWidget />
           <ImportantLinks />
         </div>
       </div>
 
-      {/* Bottom Grid */}
+      {/* Grid Inferior */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
+          {/* Acesso Rápido */}
           <QuickAccess />
         </div>
         <div>
+          {/* Atividades Recentes */}
           <RecentActivities />
         </div>
       </div>
