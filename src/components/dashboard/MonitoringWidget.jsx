@@ -1,12 +1,12 @@
 import React from 'react';
-import { 
-  LineChart, Line, AreaChart, Area, XAxis, YAxis, 
-  CartesianGrid, Tooltip, ResponsiveContainer, 
-  BarChart, Bar, Cell 
+import {
+  LineChart, Line, AreaChart, Area, XAxis, YAxis,
+  CartesianGrid, Tooltip, ResponsiveContainer,
+  BarChart, Bar, Cell
 } from 'recharts';
-import { 
-  Activity, Server, Database, Shield, 
-  Globe, Cpu, HardDrive, RefreshCcw 
+import {
+  Activity, Server, Database, Shield,
+  Globe, Cpu, HardDrive, RefreshCcw
 } from 'lucide-react';
 import { monitoringData, chartData } from '../../data/mockData.js';
 
@@ -45,43 +45,56 @@ const Monitoramento = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Gráfico de Tráfego Principal (Estilo Widget) */}
         <div className="lg:col-span-2 bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="bg-blue-900 p-4 flex items-center justify-between">
-            <h3 className="text-white font-bold text-sm uppercase flex items-center gap-2">
-              <Activity size={18} /> Histórico de Acessos e Sessões
-            </h3>
+          {/* Onde estava <div className="bg-blue-900 ...">, troque por: */}
+
+          <div className="flex items-center justify-between p-5 border-b border-gray-100 bg-white">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-blue-50 rounded-lg text-blue-600">
+                <Activity size={20} />
+              </div>
+              <h3 className="font-bold text-gray-800 text-sm md:text-base tracking-tight uppercase">
+                Histórico de Acessos e Sessões
+              </h3>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded">
+                Tempo Real
+              </span>
+            </div>
           </div>
           <div className="p-6 h-[400px]">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={chartData}>
                 <defs>
                   <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={COLORS.secondary} stopOpacity={0.1}/>
-                    <stop offset="95%" stopColor={COLORS.secondary} stopOpacity={0}/>
+                    <stop offset="5%" stopColor={COLORS.secondary} stopOpacity={0.1} />
+                    <stop offset="95%" stopColor={COLORS.secondary} stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 12}} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 12}} />
-                <Tooltip 
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#9ca3af', fontSize: 12 }} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9ca3af', fontSize: 12 }} />
+                <Tooltip
                   contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}
                 />
-                <Area 
-                  type="monotone" 
-                  dataKey="users" 
-                  stroke={COLORS.secondary} 
-                  strokeWidth={3} 
-                  fillOpacity={1} 
-                  fill="url(#colorUsers)" 
+                <Area
+                  type="monotone"
+                  dataKey="users"
+                  stroke={COLORS.secondary}
+                  strokeWidth={3}
+                  fillOpacity={1}
+                  fill="url(#colorUsers)"
                 />
-                <Area 
-                  type="monotone" 
-                  dataKey="sessions" 
-                  stroke={COLORS.success} 
-                  strokeWidth={3} 
-                  fill="transparent" 
+                <Area
+                  type="monotone"
+                  dataKey="sessions"
+                  stroke={COLORS.success}
+                  strokeWidth={3}
+                  fill="transparent"
                 />
               </AreaChart>
             </ResponsiveContainer>
