@@ -10,36 +10,27 @@ import ImportantLinks from '../components/dashboard/ImportantLinks.jsx';
 const Dashboard = () => {
   return (
     <div className="space-y-6">
-      {/* Cartões de Resumo */}
+      {/* 1. Topo: Cartões de Resumo (Ocupa a largura toda) */}
       <SummaryCards />
 
-      {/* Grid Principal */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Coluna da Esquerda - Feed de Conteúdo */}
-        <div className="lg:col-span-2 space-y-6">
+      {/* 2. Container de Colunas: Flexbox resolve o problema do vácuo */}
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
+        
+{/* COLUNA DA ESQUERDA */}
+        <div className="w-full lg:w-2/3 flex flex-col gap-6">
+          {/* Subi o Acesso Rápido para teste de layout */}
+          <QuickAccess /> 
           <ContentFeed />
-          
-          {/* Seção de Monitoramento */}
           <MonitoringWidget />
         </div>
 
-        {/* Coluna da Direita - Widgets */}
-        <div className="space-y-6">
+        {/* COLUNA DA DIREITA (33% da largura) */}
+        <div className="w-full lg:w-1/3 space-y-6">
           <RHSocialWidget />
           <ImportantLinks />
-        </div>
-      </div>
-
-      {/* Grid Inferior */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          {/* Acesso Rápido */}
-          <QuickAccess />
-        </div>
-        <div>
-          {/* Atividades Recentes */}
           <RecentActivities />
         </div>
+
       </div>
     </div>
   );

@@ -1,175 +1,155 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { BarChart3, Activity, CheckCircle, Eye } from 'lucide-react';
+import { 
+  LineChart, Line, AreaChart, Area, XAxis, YAxis, 
+  CartesianGrid, Tooltip, ResponsiveContainer, 
+  BarChart, Bar, Cell 
+} from 'recharts';
+import { 
+  Activity, Server, Database, Shield, 
+  Globe, Cpu, HardDrive, RefreshCcw 
+} from 'lucide-react';
 import { monitoringData, chartData } from '../../data/mockData.js';
-import { Link } from 'react-router-dom';
 
-const MonitoringWidget = () => {
+const Monitoramento = () => {
+  // Cores padronizadas com o projeto
+  const COLORS = {
+    primary: "#1e3a8a", // blue-900 (JUCEPE)
+    secondary: "#2563eb", // blue-600
+    success: "#22c55e", // green-500
+    warning: "#eab308", // yellow-500
+    danger: "#ef4444",  // red-500
+  };
+
   return (
-    <div className="bg-white rounded-xl shadow-card border border-gray-100 overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-between p-5 border-b border-gray-100">
-        <h2 className="section-title">Monitoramento & Dados</h2>
+    <div className="p-6 bg-gray-50 min-h-screen space-y-6">
+      {/* Header Padronizado */}
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-black text-blue-900 flex items-center gap-3 uppercase tracking-tight">
+            <Activity className="w-8 h-8 text-blue-600" />
+            Centro de Monitoramento (Zabbix)
+          </h1>
+          <p className="text-gray-500 text-sm font-medium italic">Dados de infraestrutura em tempo real</p>
+        </div>
+        <button className="flex items-center gap-2 bg-white border border-gray-200 px-4 py-2 rounded-xl text-blue-700 font-bold hover:bg-blue-50 transition-all shadow-sm">
+          <RefreshCcw className="w-4 h-4" /> Atualizar Agora
+        </button>
+      </header>
 
-        {/* Trocamos o button pelo Link apontando para /monitoramento */}
-        <Link
-          to="/monitoramento"
-          className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1 transition-colors"
-        >
-          Ver painel
-          <Eye className="w-4 h-4" />
-        </Link>
+      {/* Grid de Métricas Rápidas (Sincronizado com Widget) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <MetricCard icon={Cpu} label="Uso de CPU" value="24%" color="text-blue-600" bg="bg-blue-50" />
+        <MetricCard icon={HardDrive} label="Disco Livre" value="1.2 TB" color="text-green-600" bg="bg-green-50" />
+        <MetricCard icon={Globe} label={monitoringData.users.label} value={monitoringData.users.value} color="text-purple-600" bg="bg-purple-50" />
+        <MetricCard icon={Database} label="Status DB" value="Online" color="text-emerald-600" bg="bg-emerald-50" />
       </div>
 
-      <div className="p-5">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Power BI Metrics */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 mb-2">
-              <BarChart3 className="w-4 h-4 text-blue-600" />
-              <h3 className="text-sm font-semibold text-gray-700">Controle Interno (Power BI)</h3>
-            </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Gráfico de Tráfego Principal (Estilo Widget) */}
+        <div className="lg:col-span-2 bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="bg-blue-900 p-4 flex items-center justify-between">
+            <h3 className="text-white font-bold text-sm uppercase flex items-center gap-2">
+              <Activity size={18} /> Histórico de Acessos e Sessões
+            </h3>
+          </div>
+          <div className="p-6 h-[400px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={chartData}>
+                <defs>
+                  <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor={COLORS.secondary} stopOpacity={0.1}/>
+                    <stop offset="95%" stopColor={COLORS.secondary} stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 12}} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 12}} />
+                <Tooltip 
+                  contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="users" 
+                  stroke={COLORS.secondary} 
+                  strokeWidth={3} 
+                  fillOpacity={1} 
+                  fill="url(#colorUsers)" 
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="sessions" 
+                  stroke={COLORS.success} 
+                  strokeWidth={3} 
+                  fill="transparent" 
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
 
-            <p className="text-xs text-gray-500 mb-3">Métricas do mês atual</p>
-
-            {/* Metrics Grid */}
-            <div className="grid grid-cols-2 gap-3 mb-4">
-              <div className="bg-gray-50 rounded-lg p-3">
-                <p className="text-lg font-bold text-gray-800">{monitoringData.users.value}</p>
-                <p className="text-xs text-gray-500">{monitoringData.users.label}</p>
-              </div>
-              <div className="bg-gray-50 rounded-lg p-3">
-                <p className="text-lg font-bold text-gray-800">{monitoringData.sessions.value}</p>
-                <p className="text-xs text-gray-500">{monitoringData.sessions.label}</p>
-              </div>
-              <div className="bg-gray-50 rounded-lg p-3">
-                <p className="text-lg font-bold text-gray-800">{monitoringData.rejectionRate.value}</p>
-                <p className="text-xs text-gray-500">{monitoringData.rejectionRate.label}</p>
-              </div>
-              <div className="bg-gray-50 rounded-lg p-3">
-                <p className="text-lg font-bold text-gray-800">{monitoringData.avgTime.value}</p>
-                <p className="text-xs text-gray-500">{monitoringData.avgTime.label}</p>
-              </div>
-            </div>
-
-            {/* Chart */}
-            <div className="h-48">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                  <XAxis
-                    dataKey="name"
-                    tick={{ fontSize: 10 }}
-                    axisLine={false}
-                    tickLine={false}
-                  />
-                  <YAxis
-                    tick={{ fontSize: 10 }}
-                    axisLine={false}
-                    tickLine={false}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: '#fff',
-                      border: '1px solid #e5e7eb',
-                      borderRadius: '8px',
-                      fontSize: '12px'
-                    }}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="users"
-                    stroke="#2563eb"
-                    strokeWidth={2}
-                    dot={{ fill: '#2563eb', strokeWidth: 0, r: 3 }}
-                    activeDot={{ r: 5 }}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="sessions"
-                    stroke="#22c55e"
-                    strokeWidth={2}
-                    dot={{ fill: '#22c55e', strokeWidth: 0, r: 3 }}
-                    activeDot={{ r: 5 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+        {/* Status de Servidores (Lado Direito) */}
+        <div className="space-y-6">
+          <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+            <h3 className="font-bold text-gray-800 mb-6 flex items-center gap-2 uppercase text-xs tracking-widest text-gray-400">
+              <Server size={16} /> Status dos Ativos
+            </h3>
+            <div className="space-y-4">
+              <StatusIndicator label="Web Server 01" status="online" />
+              <StatusIndicator label="API Gateway" status="online" />
+              <StatusIndicator label="Database Cluster" status="warning" />
+              <StatusIndicator label="Firewall FortiGate" status="online" />
+              <StatusIndicator label="Backup Cloud" status="offline" />
             </div>
           </div>
 
-          {/* Zabbix Server Status */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Activity className="w-4 h-4 text-green-600" />
-              <h3 className="text-sm font-semibold text-gray-700">Módulo de Monitoramento Zabbix</h3>
-            </div>
-
-            <div className="flex items-center gap-2 mb-4">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </span>
-              <span className="text-sm text-green-600 font-medium">Online</span>
-            </div>
-
-            {/* Server Status Circle */}
-            <div className="flex flex-col items-center justify-center py-8">
-              <div className="relative w-40 h-40">
-                {/* Outer ring */}
-                <div className="absolute inset-0 rounded-full border-4 border-gray-100"></div>
-                {/* Progress ring */}
-                <svg className="absolute inset-0 w-full h-full -rotate-90">
-                  <circle
-                    cx="80"
-                    cy="80"
-                    r="76"
-                    fill="none"
-                    stroke="#22c55e"
-                    strokeWidth="8"
-                    strokeDasharray={`${2 * Math.PI * 76 * 0.95} ${2 * Math.PI * 76 * 0.05}`}
-                    strokeLinecap="round"
-                    className="drop-shadow-md"
-                  />
-                </svg>
-                {/* Inner content */}
-                <div className="absolute inset-4 rounded-full bg-white shadow-inner flex flex-col items-center justify-center">
-                  <CheckCircle className="w-8 h-8 text-green-500 mb-1" />
-                  <p className="text-xs font-semibold text-gray-600 text-center leading-tight">
-                    Servidor<br />Servidor<br />OK
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 text-center">
-                <p className="text-sm font-medium text-gray-700">{monitoringData.serverName}</p>
-                <p className="text-xs text-gray-500 mt-1">Última verificação: há 2 minutos</p>
-              </div>
-            </div>
-
-            {/* Additional Status Indicators */}
-            <div className="grid grid-cols-2 gap-3 mt-4">
-              <div className="flex items-center gap-2 p-3 bg-green-50 rounded-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-xs text-green-700 font-medium">Banco de Dados</span>
-              </div>
-              <div className="flex items-center gap-2 p-3 bg-green-50 rounded-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-xs text-green-700 font-medium">API REST</span>
-              </div>
-              <div className="flex items-center gap-2 p-3 bg-green-50 rounded-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-xs text-green-700 font-medium">Servidor Web</span>
-              </div>
-              <div className="flex items-center gap-2 p-3 bg-yellow-50 rounded-lg">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                <span className="text-xs text-yellow-700 font-medium">Backup</span>
-              </div>
+          {/* Card Informativo de Segurança */}
+          <div className="bg-blue-900 p-6 rounded-3xl text-white shadow-lg relative overflow-hidden">
+            <Shield className="absolute -right-4 -bottom-4 w-24 h-24 text-white/10" />
+            <div className="relative z-10">
+              <h4 className="font-bold mb-2">Integridade do Sistema</h4>
+              <p className="text-blue-100 text-xs leading-relaxed italic">
+                Nenhuma vulnerabilidade crítica detectada nas últimas 24 horas. Certificados SSL atualizados.
+              </p>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );
 };
 
-export default MonitoringWidget;
+// Componentes Auxiliares para manter a limpeza do código
+const MetricCard = ({ icon: Icon, label, value, color, bg }) => (
+  <div className={`bg-white p-5 rounded-3xl border border-gray-100 shadow-sm flex items-center gap-4 transition-all hover:shadow-md`}>
+    <div className={`p-4 ${bg} ${color} rounded-2xl`}>
+      <Icon size={24} />
+    </div>
+    <div>
+      <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest">{label}</p>
+      <p className="text-xl font-bold text-gray-800">{value}</p>
+    </div>
+  </div>
+);
+
+const StatusIndicator = ({ label, status }) => {
+  const configs = {
+    online: { bg: 'bg-green-100', text: 'text-green-700', dot: 'bg-green-500' },
+    warning: { bg: 'bg-yellow-100', text: 'text-yellow-700', dot: 'bg-yellow-500' },
+    offline: { bg: 'bg-red-100', text: 'text-red-700', dot: 'bg-red-500' },
+  };
+  const config = configs[status];
+
+  return (
+    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl border border-gray-100/50">
+      <span className="text-sm font-bold text-gray-700">{label}</span>
+      <div className={`${config.bg} ${config.text} text-[10px] font-black uppercase px-2 py-1 rounded-lg flex items-center gap-2`}>
+        <div className={`w-1.5 h-1.5 rounded-full ${config.dot} ${status === 'online' ? 'animate-pulse' : ''}`} />
+        {status}
+      </div>
+    </div>
+  );
+};
+
+export default Monitoramento;
