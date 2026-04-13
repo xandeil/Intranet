@@ -33,6 +33,7 @@ import PontoOnline from './pages/relatorios/PontoOnline.jsx';
 import Timesheet from './pages/relatorios/Timesheet.jsx';
 
 // Pasta Perfil (Ajustado de 'user' para 'perfil')
+import EditProfile from './pages/perfil/EditProfile.jsx';
 import Profile from './pages/perfil/Profile.jsx';
 import SettingsPage from './pages/perfil/SettingsPage.jsx';
 
@@ -76,6 +77,7 @@ function App() {
         <Route index element={<Dashboard />} />
 
         {/* Outras rotas... */}
+        <Route path="/perfil/editar" element={<EditProfile />} />
         <Route path="perfil" element={<Profile />} />
         <Route path="configuracoes" element={<SettingsPage />} />
 
