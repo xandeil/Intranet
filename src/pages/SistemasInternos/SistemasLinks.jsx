@@ -1,335 +1,202 @@
 import React, { useState } from 'react';
 import { 
-  ExternalLink, 
-  Search, 
-  Star,
-  Clock,
-  Shield,
-  Globe,
-  Server,
-  Database,
-  FileCheck,
-  BarChart3,
-  Activity,
-  Mail,
-  Phone,
-  Building2,
-  Leaf,
-  AlertTriangle
+  ExternalLink, Search, Star, Clock, Shield, Globe, Server, 
+  Database, FileCheck, BarChart3, Activity, Mail, Phone, 
+  Building2, Leaf, AlertTriangle, LayoutGrid
 } from 'lucide-react';
 
-const getStatusBadge = (status) => {
+// 1. Movi para fora para o SistemaCard conseguir enxergar e aumentei as cores/fontes
+const getStatusConfig = (status) => {
   const configs = {
-    online: { color: 'bg-green-500', label: 'Online' },
-    warning: { color: 'bg-yellow-500', label: 'Instável' },
-    maintenance: { color: 'bg-orange-500', label: 'Manutenção' },
-    offline: { color: 'bg-red-500', label: 'Offline' }
+    online: { color: 'text-green-700', bg: 'bg-green-100', dot: 'bg-green-500', label: 'Operacional' },
+    warning: { color: 'text-yellow-700', bg: 'bg-yellow-100', dot: 'bg-yellow-500', label: 'Instável' },
+    maintenance: { color: 'text-orange-700', bg: 'bg-orange-100', dot: 'bg-orange-500', label: 'Manutenção' },
+    offline: { color: 'text-red-700', bg: 'bg-red-100', dot: 'bg-red-500', label: 'Indisponível' }
   };
-  return configs[status] || configs.online; // Adicionei o "|| online" por segurança
+  return configs[status] || configs.online;
 };
 
-const SistemasLinks = () => {
+// 2. Componente de Card (Aumentei o Status aqui)
+const SistemaCard = ({ sistema, isFavorite, onToggleFavorite }) => {
+  const Icon = sistema.icon;
+  const status = getStatusConfig(sistema.status);
+
+  return (
+    <div className={`bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col min-h-[220px] group ${sistema.status === 'maintenance' ? 'opacity-85' : ''}`}>
+      
+      {/* Cabeçalho Azul */}
+      <div className="bg-blue-900 p-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-white/10 rounded-lg text-white group-hover:bg-white/20 transition-colors">
+            <Icon size={20} />
+          </div>
+          <h3 className="font-bold text-white text-sm md:text-base tracking-tight uppercase">
+            {sistema.name}
+          </h3>
+        </div>
+        
+        <button 
+          onClick={(e) => { e.preventDefault(); onToggleFavorite(); }}
+          className={`p-1.5 rounded-lg transition-colors ${isFavorite ? 'text-yellow-400' : 'text-white/40 hover:text-white'}`}
+        >
+          <Star size={18} className={isFavorite ? 'fill-yellow-400' : ''} />
+        </button>
+      </div>
+
+      {/* Corpo Branco */}
+      <div className="p-5 flex-1 flex flex-col justify-between bg-white">
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            {/* STATUS AUMENTADO AQUI (text-11px e animação no ponto) */}
+            <div className={`${status.bg} ${status.color} text-[11px] font-black uppercase px-3 py-1 rounded-lg flex items-center gap-2 border border-black/5 shadow-sm`}>
+              <div className={`w-2 h-2 rounded-full ${status.dot} animate-pulse`} />
+              {status.label}
+            </div>
+            
+            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded">
+              {sistema.category}
+            </span>
+          </div>
+          
+          <p className="text-sm text-gray-500 leading-relaxed line-clamp-2 italic">
+            {sistema.description}
+          </p>
+        </div>
+
+        <div className="mt-5 pt-4 border-t border-gray-50 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 text-[11px] font-bold text-gray-400">
+            <Clock size={12} />
+            {sistema.users} usuários
+          </div>
+          
+          <a 
+            href={sistema.url}
+            className="flex items-center gap-1.5 text-blue-700 text-xs font-black hover:text-blue-900 transition-all group-hover:gap-3"
+          >
+            ACESSAR SISTEMA <ExternalLink size={14} />
+          </a>
+        </div>
+      </div>
+
+      {/* Faixa de Manutenção */}
+      {sistema.status === 'maintenance' && (
+        <div className="bg-orange-500 text-white text-[10px] font-bold text-center py-1 uppercase tracking-tighter">
+          Sistema em Manutenção
+        </div>
+      )}
+    </div>
+  );
+};
+
+const SistemasInternos = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState(['sei', 'regin']);
 
   const sistemas = [
-    {
-      id: 'regin',
-      name: 'REGIN',
-      description: 'Registro de Imóveis e Negócios',
-      category: 'Registro',
-      icon: Building2,
-      color: 'from-blue-500 to-blue-600',
-      bgColor: 'bg-blue-50',
-      url: '#',
-      status: 'online',
-      users: '1.2k'
-    },
-    {
-      id: 'sei',
-      name: 'SEI',
-      description: 'Sistema Eletrônico de Informações',
-      category: 'Processos',
-      icon: FileCheck,
-      color: 'from-green-500 to-green-600',
-      bgColor: 'bg-green-50',
-      url: '#',
-      status: 'online',
-      users: '856'
-    },
-    {
-      id: 'iged',
-      name: 'iGED',
-      description: 'Gestão Eletrônica de Documentos',
-      category: 'Documentos',
-      icon: Database,
-      color: 'from-purple-500 to-purple-600',
-      bgColor: 'bg-purple-50',
-      url: '#',
-      status: 'online',
-      users: '643'
-    },
-    {
-      id: 'zabbix',
-      name: 'Zabbix',
-      description: 'Monitoramento de Infraestrutura',
-      category: 'TI',
-      icon: Activity,
-      color: 'from-red-500 to-red-600',
-      bgColor: 'bg-red-50',
-      url: '#',
-      status: 'warning',
-      users: '45'
-    },
-    {
-      id: 'powerbi',
-      name: 'Power BI',
-      description: 'Business Intelligence e Relatórios',
-      category: 'Dados',
-      icon: BarChart3,
-      color: 'from-yellow-500 to-yellow-600',
-      bgColor: 'bg-yellow-50',
-      url: '#',
-      status: 'online',
-      users: '234'
-    },
-    {
-      id: 'seloverde',
-      name: 'SELOVERDE',
-      description: 'Sistema de Licenciamento Ambiental',
-      category: 'Meio Ambiente',
-      icon: Leaf,
-      color: 'from-emerald-500 to-emerald-600',
-      bgColor: 'bg-emerald-50',
-      url: '#',
-      status: 'online',
-      users: '89'
-    },
-    {
-      id: 'expresso',
-      name: 'EXPRESSO',
-      description: 'Correio Eletrônico Institucional',
-      category: 'Comunicação',
-      icon: Mail,
-      color: 'from-orange-500 to-orange-600',
-      bgColor: 'bg-orange-50',
-      url: '#',
-      status: 'online',
-      users: '2.1k'
-    },
-    {
-      id: 'sip',
-      name: 'SIP',
-      description: 'Sistema de Informações Pessoais',
-      category: 'RH',
-      icon: Phone,
-      color: 'from-cyan-500 to-cyan-600',
-      bgColor: 'bg-cyan-50',
-      url: '#',
-      status: 'maintenance',
-      users: '0'
-    },
-    {
-      id: 'csati',
-      name: 'CSATI',
-      description: 'Central de Atendimento TI',
-      category: 'Suporte',
-      icon: Server,
-      color: 'from-indigo-500 to-indigo-600',
-      bgColor: 'bg-indigo-50',
-      url: '#',
-      status: 'online',
-      users: '12'
-    }
+    { id: 'regin', name: 'REGIN', description: 'Sistema de Registro de Imóveis e Negócios para integração mercantil.', category: 'Registro', icon: Building2, url: '#', status: 'online', users: '1.2k' },
+    { id: 'sei', name: 'SEI', description: 'Sistema Eletrônico de Informações - Gestão de processos administrativos.', category: 'Processos', icon: FileCheck, url: '#', status: 'online', users: '856' },
+    { id: 'iged', name: 'iGED', description: 'Gestão Eletrônica de Documentos e arquivamento digital.', category: 'Documentos', icon: Database, url: '#', status: 'online', users: '643' },
+    { id: 'zabbix', name: 'Zabbix', description: 'Painel de monitoramento de ativos e infraestrutura de rede.', category: 'TI', icon: Activity, url: '#', status: 'warning', users: '45' },
+    { id: 'powerbi', name: 'Power BI', description: 'Dashboards de Business Intelligence e análise de dados.', category: 'Dados', icon: BarChart3, url: '#', status: 'online', users: '234' },
+    { id: 'seloverde', name: 'SELOVERDE', description: 'Licenciamento e controle ambiental de empresas.', category: 'Meio Ambiente', icon: Leaf, url: '#', status: 'online', users: '89' },
+    { id: 'expresso', name: 'EXPRESSO', description: 'Servidor de correio eletrônico e comunicação interna.', category: 'Comunicação', icon: Mail, url: '#', status: 'online', users: '2.1k' },
+    { id: 'sip', name: 'SIP', description: 'Sistema de Informações Pessoais e gestão de RH.', category: 'RH', icon: Phone, url: '#', status: 'maintenance', users: '0' },
+    { id: 'csati', name: 'CSATI', description: 'Abertura de chamados e suporte técnico de TI.', category: 'Suporte', icon: Server, url: '#', status: 'online', users: '12' }
   ];
 
   const toggleFavorite = (id) => {
-    setFavorites(prev => 
-      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-    );
+    setFavorites(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]);
   };
-
-//   const getStatusBadge = (status) => {
-//     const configs = {
-//       online: { color: 'bg-green-500', label: 'Online' },
-//       warning: { color: 'bg-yellow-500', label: 'Instável' },
-//       maintenance: { color: 'bg-orange-500', label: 'Manutenção' },
-//       offline: { color: 'bg-red-500', label: 'Offline' }
-//     };
-//     return configs[status];
-//   };
 
   const filteredSistemas = sistemas.filter(s => 
     s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    s.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    s.category.toLowerCase().includes(searchQuery.toLowerCase())
+    s.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const favoritedSistemas = sistemas.filter(s => favorites.includes(s.id));
   const regularSistemas = filteredSistemas.filter(s => !favorites.includes(s.id));
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+    <div className="p-6 bg-gray-50 min-h-screen space-y-6">
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
-            <Globe className="w-8 h-8 text-jucepe-secondary" />
+          <h1 className="text-2xl font-black text-blue-900 flex items-center gap-3 uppercase tracking-tight">
+            <Globe className="w-8 h-8 text-blue-600" />
             Sistemas Internos
           </h1>
-          <p className="text-gray-500 mt-1">Acesse os sistemas e ferramentas da JUCEPE</p>
+          <p className="text-gray-500 text-sm font-medium">Ecossistema de ferramentas digitais JUCEPE</p>
         </div>
-        
-        <div className="relative max-w-md w-full lg:w-96">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+
+        <div className="relative w-full md:w-96">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
-            placeholder="Buscar sistemas..."
+            placeholder="Pesquisar sistema..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-jucepe-secondary focus:border-transparent outline-none shadow-sm"
+            className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all"
           />
         </div>
-      </div>
+      </header>
 
-      {/* Stats */}
+      {/* Grid de Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Sistemas Online', value: sistemas.filter(s => s.status === 'online').length, color: 'green' },
-          { label: 'Em Manutenção', value: sistemas.filter(s => s.status === 'maintenance').length, color: 'orange' },
-          { label: 'Instáveis', value: sistemas.filter(s => s.status === 'warning').length, color: 'yellow' },
-          { label: 'Favoritos', value: favorites.length, color: 'blue' }
+          { label: 'Sistemas Online', value: sistemas.filter(s => s.status === 'online').length, color: 'text-green-600', bg: 'bg-green-50' },
+          { label: 'Instáveis', value: sistemas.filter(s => s.status === 'warning').length, color: 'text-yellow-600', bg: 'bg-yellow-50' },
+          { label: 'Manutenção', value: sistemas.filter(s => s.status === 'maintenance').length, color: 'text-orange-600', bg: 'bg-orange-50' },
+          { label: 'Meus Atalhos', value: favorites.length, color: 'text-blue-600', bg: 'bg-blue-50' }
         ].map((stat, idx) => (
-          <div key={idx} className={`bg-${stat.color}-50 border border-${stat.color}-100 rounded-xl p-4`}>
-            <p className={`text-2xl font-bold text-${stat.color}-600`}>{stat.value}</p>
-            <p className={`text-sm text-${stat.color}-700`}>{stat.label}</p>
+          <div key={idx} className={`${stat.bg} p-4 rounded-2xl border border-gray-100 flex flex-col`}>
+            <span className={`text-2xl font-black ${stat.color}`}>{stat.value}</span>
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">{stat.label}</span>
           </div>
         ))}
       </div>
 
-      {/* Favorites Section */}
+      {/* Favoritos */}
       {favoritedSistemas.length > 0 && !searchQuery && (
-        <div>
-          <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-            <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-            Favoritos
+        <section className="space-y-4">
+          <h2 className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] flex items-center gap-2">
+            <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" /> Atalhos Rápidos
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {favoritedSistemas.map(sistema => (
-       <SistemaCard 
-        key={sistema.id} 
-        sistema={sistema} 
-        isFavorite={favorites.includes(sistema.id)}
-        onToggleFavorite={() => toggleFavorite(sistema.id)}
-        statusConfig={getStatusBadge(sistema.status)} // Passando o resultado aqui
-       />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {favoritedSistemas.map(s => (
+              <SistemaCard key={s.id} sistema={s} isFavorite={true} onToggleFavorite={() => toggleFavorite(s.id)} />
             ))}
           </div>
-        </div>
+        </section>
       )}
 
-      {/* All Systems */}
-      <div>
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          Todos os Sistemas
+      {/* Galeria */}
+      <section className="space-y-4">
+        <h2 className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] flex items-center gap-2">
+          <LayoutGrid className="w-4 h-4 text-blue-600" /> Galeria de Aplicações
         </h2>
-        
-        {regularSistemas.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
-            <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-600">Nenhum sistema encontrado</h3>
-            <p className="text-gray-500">Tente ajustar sua busca</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {regularSistemas.map(sistema => (
-              <SistemaCard 
-                key={sistema.id} 
-                sistema={sistema} 
-                isFavorite={favorites.includes(sistema.id)}
-                onToggleFavorite={() => toggleFavorite(sistema.id)}
-              />
-            ))}
-          </div>
-        )}
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {regularSistemas.map(s => (
+            <SistemaCard key={s.id} sistema={s} isFavorite={false} onToggleFavorite={() => toggleFavorite(s.id)} />
+          ))}
+        </div>
+      </section>
 
-      {/* Warning Banner */}
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 flex items-start gap-3">
-        <AlertTriangle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
-        <div>
-          <h4 className="font-semibold text-yellow-800">Manutenção Programada</h4>
-          <p className="text-sm text-yellow-700 mt-1">
-            O sistema SIP estará em manutenção no dia 15/05 das 22h às 06h. 
-            O SEI pode apresentar lentidão durante o período.
+      {/* Banner */}
+      <div className="bg-blue-900 rounded-3xl p-6 text-white flex items-center gap-6 relative overflow-hidden">
+        <div className="relative z-10">
+          <h4 className="font-bold flex items-center gap-2 mb-1">
+            <AlertTriangle className="w-5 h-5 text-blue-300" /> 
+            Aviso de Manutenção
+          </h4>
+          <p className="text-blue-100 text-sm italic">
+            O sistema SIP (RH) passará por atualização crítica em 15/05. Programe seus envios.
           </p>
         </div>
+        <div className="absolute right-[-20px] bottom-[-20px] opacity-10">
+          <Server size={120} />
+        </div>
       </div>
     </div>
   );
 };
 
-// Sistema Card Component
-const SistemaCard = ({ sistema, isFavorite, onToggleFavorite }) => {
-  const IconComponent = sistema.icon;
-  const status = getStatusBadge(sistema.status);
-
-  return (
-    <div className={`group bg-white rounded-xl border border-gray-200 hover:border-jucepe-secondary/50 hover:shadow-lg transition-all duration-300 overflow-hidden ${sistema.status === 'maintenance' ? 'opacity-75' : ''}`}>
-      {/* Header with gradient */}
-      <div className={`h-24 bg-gradient-to-r ${sistema.color} p-4 relative`}>
-        <div className="absolute top-3 right-3 flex gap-2">
-          <button 
-            onClick={(e) => { e.preventDefault(); onToggleFavorite(); }}
-            className="p-2 bg-white/20 hover:bg-white/30 rounded-lg backdrop-blur-sm transition-colors"
-          >
-            <Star className={`w-4 h-4 ${isFavorite ? 'text-yellow-300 fill-yellow-300' : 'text-white'}`} />
-          </button>
-          <a 
-            href={sistema.url}
-            className="p-2 bg-white/20 hover:bg-white/30 rounded-lg backdrop-blur-sm transition-colors"
-          >
-            <ExternalLink className="w-4 h-4 text-white" />
-          </a>
-        </div>
-        
-        <div className={`w-14 h-14 ${sistema.bgColor} rounded-xl flex items-center justify-center shadow-lg`}>
-          <IconComponent className="w-7 h-7 text-gray-700" />
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-5">
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="font-bold text-gray-800 text-lg">{sistema.name}</h3>
-          <div className={`flex items-center gap-1.5 px-2 py-1 rounded-full ${status.color} bg-opacity-10`}>
-            <div className={`w-2 h-2 rounded-full ${status.color}`} />
-            <span className="text-xs font-medium text-gray-600">{status.label}</span>
-          </div>
-        </div>
-        
-        <p className="text-sm text-gray-500 mb-4 line-clamp-2">{sistema.description}</p>
-        
-        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-          <span className="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-1 rounded">
-            {sistema.category}
-          </span>
-          
-          <div className="flex items-center gap-1 text-sm text-gray-500">
-            <Clock className="w-4 h-4" />
-            {sistema.users} usuários
-          </div>
-        </div>
-
-        {sistema.status === 'maintenance' && (
-          <div className="mt-3 p-2 bg-orange-50 rounded-lg flex items-center gap-2">
-            <Shield className="w-4 h-4 text-orange-500" />
-            <span className="text-xs text-orange-600">Em manutenção</span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default SistemasLinks;
+export default SistemasInternos;
