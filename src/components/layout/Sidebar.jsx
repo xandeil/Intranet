@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { NavLink, useLocation } from 'react-router-dom';
-import { 
-  Home, 
-  FileText, 
-  BookOpen, 
-  Mail, 
-  Settings, 
-  User, 
-  Gift, 
-  Calendar, 
-  Layers, 
-  BarChart3, 
-  Activity, 
-  FileBarChart, 
-  Clock, 
+import React, { useState, useEffect } from 'react'; // Adicione useEffect aqui
+import { NavLink, useLocation, Link } from 'react-router-dom';
+import {
+  Home,
+  FileText,
+  BookOpen,
+  Mail,
+  Settings,
+  User,
+  Gift,
+  Calendar,
+  Layers,
+  BarChart3,
+  Activity,
+  FileBarChart,
+  Clock,
   Timer,
   ChevronDown,
   ChevronUp,
-  Headphones
+  Headphones,
+  X
 } from 'lucide-react';
 import { navigationSections } from '../../data/mockData.js';
 
@@ -27,8 +27,17 @@ const iconMap = {
   Layers, BarChart3, Activity, FileBarChart, Clock, Timer
 };
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
+
+  // Fecha a sidebar automaticamente ao mudar de página no mobile
+  useEffect(() => {
+    // Só fechamos se estiver no mobile (janela pequena)
+    if (window.innerWidth < 1024) {
+      setIsOpen(false);
+    }
+  }, [location, setIsOpen]);
+  
   const [expandedSections, setExpandedSections] = useState({
     'NAVEGAÇÃO': true,
     'RH & COMUNICAÇÃO': true,
@@ -46,16 +55,31 @@ const Sidebar = ({ isOpen }) => {
   if (!isOpen) return null;
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-jucepe-dark text-white overflow-y-auto z-50 shadow-xl flex flex-col">
+    <aside
+      className={`
+        fixed left-0 top-0 h-full w-64 bg-jucepe-dark text-white z-50 shadow-xl flex flex-col 
+        transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+        lg:translate-x-0
+      `}
+    >
+      {/* Botão para fechar (Apenas Mobile) */}
+      <button
+        onClick={() => setIsOpen(false)}
+        className="lg:hidden absolute right-4 top-4 text-gray-400 hover:text-white p-2 transition-colors"
+      >
+        <X size={24} />
+      </button>
+
       {/* Logo Area */}
-<div className="h-16 flex items-center px-6 bg-jucepe-primary border-b border-blue-800 flex-shrink-0">
-  <Link 
-    to="/" 
-    className="text-xl font-bold tracking-wider text-white hover:opacity-80 transition-opacity cursor-pointer"
-  >
-    JUCEPE
-  </Link>
-</div>
+      <div className="h-16 flex items-center px-6 bg-jucepe-primary border-b border-blue-800 flex-shrink-0">
+        <Link
+          to="/"
+          className="text-xl font-bold tracking-wider text-white hover:opacity-80 transition-opacity cursor-pointer"
+        >
+          JUCEPE
+        </Link>
+      </div>
 
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
@@ -79,7 +103,7 @@ const Sidebar = ({ isOpen }) => {
               <div className="mt-1 space-y-1">
                 {section.items.map((item) => {
                   const IconComponent = iconMap[item.icon] || FileText;
-                  const isActive = location.pathname === item.path || 
+                  const isActive = location.pathname === item.path ||
                     (item.path !== '/' && location.pathname.startsWith(item.path));
 
                   return (
@@ -88,8 +112,8 @@ const Sidebar = ({ isOpen }) => {
                       to={item.path}
                       className={({ isActive }) => `
                         flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200
-                        ${isActive 
-                          ? 'bg-jucepe-primary text-white shadow-md' 
+                        ${isActive
+                          ? 'bg-jucepe-primary text-white shadow-md'
                           : 'text-gray-300 hover:bg-jucepe-primary/50 hover:text-white'
                         }
                       `}
