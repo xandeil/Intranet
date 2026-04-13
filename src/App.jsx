@@ -13,18 +13,18 @@ import Login from './pages/auth/Login.jsx';
 import NotFound from './pages/errors/NotFound.jsx';
 
 // --- RH & Comunicação ---
-import Aniversariantes from './pages/rh/Aniversariantes.jsx';
-import Cronogramas from './pages/rh/Cronogramas.jsx';
-import Contato from './pages/comunicacao/Contato.jsx';
-import Publications from './pages/comunicacao/Publications.jsx';
+import Aniversariantes from './pages/Rh&Comunicacao/Aniversariantes.jsx';
+import Cronogramas from './pages/Rh&Comunicacao/Cronogramas.jsx';
+import Contato from './pages/Navegacao/Contato.jsx';
+import Publications from './pages/Navegacao/Publications.jsx';
 
 // --- Documentos ---
-import Documents from './pages/documentos/Documents.jsx';
+import Documents from './pages/Navegacao/Documents.jsx';
 
 // --- Sistemas Internos ---
-import SistemasLinks from './pages/sistemas/SistemasLinks.jsx';
-import Monitoramento from './pages/sistemas/Monitoramento.jsx';
-import PowerBI from './pages/sistemas/PowerBI.jsx';
+import SistemasLinks from './pages/SistemasInternos/SistemasLinks.jsx';
+import Monitoramento from './pages/SistemasInternos/Monitoramento.jsx';
+import PowerBI from './pages/SistemasInternos/PowerBI.jsx';
 
 // --- Relatórios ---
 import Relatorios from './pages/relatorios/Relatorios.jsx';
@@ -36,8 +36,8 @@ import Profile from './pages/perfil/Profile.jsx';
 import SettingsPage from './pages/perfil/SettingsPage.jsx';
 
 // --- Administração ---
-import Admin from './pages/administracao/Admin.jsx';
-import Publicar from './pages/administracao/Publicar.jsx';
+import Admin from "./pages/Navegacao/Admin.jsx";
+import Publicar from "./pages/Header/Publicar.jsx";
 
 
 // Protected Route Component
@@ -84,7 +84,7 @@ function App() {
         <Route path="contato" element={<Contato />} />
 
         {/* RH & Comunicação */}
-        <Route path="presidente" element={<Cronogramas />} />
+        <Route path="presidente" element={<Presidencia />} />
         <Route path="aniversariantes" element={<Aniversariantes />} />
         <Route path="cronogramas" element={<Cronogramas />} />
 
