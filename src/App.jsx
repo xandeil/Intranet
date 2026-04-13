@@ -13,6 +13,7 @@ import Login from './pages/auth/Login.jsx';
 import NotFound from './pages/errors/NotFound.jsx';
 
 // --- RH & Comunicação ---
+import Presidencia from './pages/Rh&Comunicacao/Presidente.jsx';
 import Aniversariantes from './pages/Rh&Comunicacao/Aniversariantes.jsx';
 import Cronogramas from './pages/Rh&Comunicacao/Cronogramas.jsx';
 import Contato from './pages/Navegacao/Contato.jsx';
