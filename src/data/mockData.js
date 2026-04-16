@@ -142,7 +142,9 @@ export const importantLinks = [
   { id: 7, name: 'CSATI', icon: 'Server', url: '#' },
   { id: 8, name: 'SIP', icon: 'Phone', url: '#' },
   { id: 9, name: 'Ponto Online', icon: 'Clock', url: '#' },
-  { id: 10, name: 'Timesheet JUCEPE', icon: 'Spreadsheet', url: '#' }
+  { id: 10, name: 'Timesheet JUCEPE', icon: 'FileSpreadsheet', url: '#' }, // Corrigido para bater com o iconMap
+  { id: 11, name: 'Link de Homologação', icon: 'TestTube', url: '#' },     // NOVO (Faltava no print)
+  { id: 12, name: 'Portal Antigo', icon: 'History', url: '#' }            // NOVO (Faltava no print)
 ];
 
 export const userData = {

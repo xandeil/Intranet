@@ -16,7 +16,7 @@ const Dashboard = () => {
       {/* 2. Container de Colunas: Flexbox resolve o problema do vácuo */}
       <div className="flex flex-col lg:flex-row gap-6 items-start">
         
-{/* COLUNA DA ESQUERDA */}
+        {/* COLUNA DA ESQUERDA */}
         <div className="w-full lg:w-2/3 flex flex-col gap-6">
           {/* Subi o Acesso Rápido para teste de layout */}
           <QuickAccess /> 
