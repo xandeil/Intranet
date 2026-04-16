@@ -8,7 +8,9 @@ import {
   Server, 
   Phone, 
   Clock, 
-  FileSpreadsheet
+  FileSpreadsheet, // Verifique se é esse o nome no seu import
+  TestTube,        // Adicione este para o Link de Homologação
+  History          // Adicione este para o Portal Antigo
 } from 'lucide-react';
 import { importantLinks } from '../../data/mockData.js';
 

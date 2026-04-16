@@ -12,23 +12,29 @@ const Layout = ({ isSidebarOpen, setIsSidebarOpen }) => {
   };
 
   return (
-    <div className="min-h-screen bg-jucepe-surface flex">
+    // O fundo geral agora segue o token de superfície da JUCEPE e a fonte padrão
+    <div className="min-h-screen bg-jucepe-surface flex font-sans">
+      
       {/* Sidebar - Agora usando a prop vinda do App */}
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       
       {/* Main Content - Ajustado para usar isSidebarOpen */}
       <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'lg:ml-64' : ''}`}>
+        
         <Header onMenuToggle={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         
+        {/* Espaçamento padrão de todas as páginas definido aqui (p-6) */}
         <main className="flex-1 p-6 overflow-auto">
           <Outlet />
         </main>
+
         <MensagemModal />
-        {/* Footer */}
-        <footer className="bg-white border-t border-gray-200 py-4 px-6">
-          <div className="flex justify-between items-center text-sm text-gray-500">
-            <span>© 2024 JUCEPE - Junta Comercial de Pernambuco. Todos os direitos reservados.</span>
-            <span>Versão 1.0.0</span>
+
+        {/* Footer padronizado com as bordas leves e cores do seu sistema */}
+        <footer className="bg-white border-t border-jucepe-light py-4 px-6">
+          <div className="flex justify-between items-center text-xs sm:text-sm text-jucepe-dark/60">
+            <span>© 2026 JUCEPE - Junta Comercial de Pernambuco. Todos os direitos reservados.</span>
+            <span className="font-medium text-jucepe-dark">Versão 1.0.0</span>
           </div>
         </footer>
       </div>
