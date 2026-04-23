@@ -14,17 +14,19 @@ const Layout = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     // O fundo geral agora segue o token de superfície da JUCEPE e a fonte padrão
     <div className="min-h-screen bg-jucepe-surface flex font-sans">
-      
+
       {/* Sidebar - Agora usando a prop vinda do App */}
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      
+
       {/* Main Content - Ajustado para usar isSidebarOpen */}
-      <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'lg:ml-64' : ''}`}>
-        
-        <Header onMenuToggle={toggleSidebar} isSidebarOpen={isSidebarOpen} />
-        
-        {/* Espaçamento padrão de todas as páginas definido aqui (p-6) */}
-        <main className="flex-1 p-6 overflow-auto">
+      <div className={`
+        flex-1 flex flex-col min-h-screen transition-all duration-300 
+        /* MÁGICA AQUI: No desktop, a margem é fixa em 64, 
+        independente se a sidebar mobile sumiu ou não */
+        lg:ml-64
+      `}>
+        <Header onMenuToggle={toggleSidebar} />
+        <main className="p-6 bg-jucepe-surface flex-1">
           <Outlet />
         </main>
 

@@ -37,7 +37,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       setIsOpen(false);
     }
   }, [location, setIsOpen]);
-  
+
   const [expandedSections, setExpandedSections] = useState({
     'NAVEGAÇÃO': true,
     'RH & COMUNICAÇÃO': true,
@@ -52,13 +52,12 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     }));
   };
 
-  if (!isOpen) return null;
-
   return (
     <aside
       className={`
-        fixed left-0 top-0 h-full w-64 bg-jucepe-dark text-white z-50 shadow-xl flex flex-col 
+        fixed left-0 top-0 h-full w-64 bg-jucepe-dark text-white z-50 flex flex-col 
         transition-transform duration-300 ease-in-out
+        /* Mobile: usa o estado isOpen / Desktop: sempre visível (0) */
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
         lg:translate-x-0
       `}
