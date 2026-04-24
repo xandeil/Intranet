@@ -18,8 +18,8 @@ const Layout = ({ isSidebarOpen, setIsSidebarOpen }) => {
       {/* Sidebar - Agora usando a prop vinda do App */}
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       
-      {/* Main Content - Ajustado para usar isSidebarOpen */}
-      <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'lg:ml-64' : ''}`}>
+      {/* Main Content - Ajustado para usar isSidebarOpen e respeitar o espaço da sidebar apenas se aberta */}
+      <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'lg:ml-64' : 'lg:ml-0'}`}>
         
         <Header onMenuToggle={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         

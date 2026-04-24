@@ -52,7 +52,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     }));
   };
 
-  if (!isOpen) return null;
+  // REMOVIDO: if (!isOpen) return null; para não quebrar a lógica do Desktop
 
   return (
     <aside
@@ -60,7 +60,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         fixed left-0 top-0 h-full w-64 bg-jucepe-dark text-white z-50 shadow-xl flex flex-col 
         transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
-        lg:translate-x-0
+        /* Mantemos a lógica de translate controlada pelo estado para funcionar com o Layout */
       `}
     >
       {/* Botão para fechar (Apenas Mobile) */}

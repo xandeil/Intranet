@@ -4,7 +4,7 @@ import {
   Package, Monitor, Shield, Gift, LayoutGrid 
 } from 'lucide-react';
 import { quickAccessItems } from '../../data/mockData.js';
-import Card from '../ui/Card'; // Importando o seu componente padronizado
+import Card from '../ui/Card';
 
 const iconMap = {
   Calendar, Image, Newspaper, Users, Database, Package, Monitor, Shield, Gift
@@ -12,8 +12,10 @@ const iconMap = {
 
 const QuickAccess = () => {
   return (
-    // Usando o Card padronizado com título e ícone
     <Card title="Acesso Rápido" icon={LayoutGrid}>
+      {/* Mudança chave: grid-cols-2 para celulares comuns, 
+        mas os itens internos vão se comportar melhor 
+      */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {quickAccessItems.map((item) => {
           const IconComponent = iconMap[item.icon] || Database;
@@ -21,19 +23,20 @@ const QuickAccess = () => {
           return (
             <button
               key={item.id}
-              className="flex items-start gap-3 p-4 rounded-jucepe border border-jucepe-light hover:border-jucepe-secondary/30 hover:shadow-hover transition-all duration-200 group text-left"
+              className="flex flex-col xs:flex-row items-center xs:items-start gap-2 xs:gap-3 p-3 xs:p-4 rounded-jucepe border border-jucepe-light hover:border-jucepe-secondary/30 hover:shadow-hover transition-all duration-200 group text-center xs:text-left"
             >
-              {/* Ícone com cor vinda do mockData, mas usando border-radius padronizado */}
-              <div className={`p-2 rounded-lg ${item.color} group-hover:scale-110 transition-transform`}>
+              {/* Container do ícone - Centralizado no mobile */}
+              <div className={`p-2 rounded-lg ${item.color} group-hover:scale-110 transition-transform shrink-0`}>
                 <IconComponent className="w-5 h-5" />
               </div>
               
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-jucepe-dark leading-tight group-hover:text-jucepe-secondary transition-colors">
+              {/* Texto - Ajustado para não quebrar o layout */}
+              <div className="flex-1 min-w-0 w-full">
+                <p className="text-xs xs:text-sm font-bold text-jucepe-dark leading-tight group-hover:text-jucepe-secondary transition-colors break-words">
                   {item.label}
                 </p>
                 {item.subtitle && (
-                  <p className="text-xs text-jucepe-dark/50 mt-0.5 truncate">
+                  <p className="hidden xs:block text-[10px] text-jucepe-dark/50 mt-0.5 truncate">
                     {item.subtitle}
                   </p>
                 )}
