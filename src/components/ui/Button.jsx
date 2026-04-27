@@ -9,8 +9,9 @@ const Button = ({
   ...props 
 }) => {
   
-  // Estilos base do sistema JUCEPE
-  const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:pointer-events-none rounded-jucepe";
+  // Estilos base do sistema JUCEPE com rounded-jucepe para bordas arredondadas
+  // Adicionado whitespace-nowrap para evitar quebra de texto feia no mobile
+  const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:pointer-events-none rounded-jucepe whitespace-nowrap shrink-0";
   
   // Variantes de cores baseadas no seu tailwind.config.js
   const variants = {
@@ -33,7 +34,7 @@ const Button = ({
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
-      {Icon && <Icon className={`mr-2 ${size === 'sm' ? 'w-3 h-3' : 'w-4 h-4'}`} />}
+      {Icon && <Icon className={`${children ? 'mr-2' : ''} ${size === 'sm' ? 'w-3 h-3' : 'w-4 h-4'}`} />}
       {children}
     </button>
   );

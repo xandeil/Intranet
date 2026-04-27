@@ -15,6 +15,7 @@ const Badge = ({ children, variant = 'default', className = "" }) => {
       inline-flex items-center px-2.5 py-0.5 
       rounded-full text-xs font-semibold 
       transition-colors duration-200
+      whitespace-nowrap
       ${variants[variant] || variants.default}
       ${className}
     `}>

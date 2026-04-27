@@ -9,7 +9,7 @@ const Card = ({ children, title, icon: Icon, className = "", onClick }) => {
         bg-white 
         rounded-jucepe 
         shadow-card 
-        p-6 
+        p-4 sm:p-6 
         border border-jucepe-light 
         transition-all 
         duration-200
@@ -20,8 +20,8 @@ const Card = ({ children, title, icon: Icon, className = "", onClick }) => {
       {/* Cabeçalho do Card (Opcional) */}
       {(title || Icon) && (
         <div className="flex items-center gap-3 mb-4">
-          {Icon && <Icon className="w-5 h-5 text-jucepe-secondary" />}
-          {title && <h3 className="font-semibold text-jucepe-dark text-lg">{title}</h3>}
+          {Icon && <Icon className="w-5 h-5 text-jucepe-secondary shrink-0" />}
+          {title && <h3 className="font-semibold text-jucepe-dark text-lg leading-tight">{title}</h3>}
         </div>
       )}
 
