@@ -87,26 +87,26 @@ const Documents = () => {
   };
 
   const columns = [
-    { 
+    {
       header: (
-        <input 
-          type="checkbox" 
+        <input
+          type="checkbox"
           checked={selectedDocs.length === paginatedDocs.length && paginatedDocs.length > 0}
           onChange={toggleSelectAll}
           className="rounded border-gray-300 text-jucepe-secondary focus:ring-jucepe-secondary"
         />
       ),
       render: (doc) => (
-        <input 
-          type="checkbox" 
+        <input
+          type="checkbox"
           checked={selectedDocs.includes(doc.id)}
           onChange={() => toggleSelect(doc.id)}
           className="rounded border-gray-300 text-jucepe-secondary focus:ring-jucepe-secondary"
         />
       )
     },
-    { 
-      header: 'Documento', 
+    {
+      header: 'Documento',
       render: (doc) => (
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-jucepe-surface flex items-center justify-center border border-jucepe-light shrink-0">
@@ -122,7 +122,7 @@ const Documents = () => {
     { header: 'Departamento', key: 'department' },
     { header: 'Tipo', key: 'type' },
     { header: 'Data', key: 'date' },
-    { 
+    {
       header: 'Autor',
       render: (doc) => (
         <div className="flex items-center gap-2">
@@ -131,8 +131,8 @@ const Documents = () => {
         </div>
       )
     },
-    { 
-      header: 'Status', 
+    {
+      header: 'Status',
       render: (doc) => (
         <Badge variant={doc.status === 'published' ? 'success' : doc.status === 'draft' ? 'warning' : 'default'}>
           {doc.status === 'published' ? 'Publicado' : doc.status === 'draft' ? 'Rascunho' : 'Arquivado'}
@@ -225,18 +225,21 @@ const Documents = () => {
         </div>
 
         {/* Tabs com Scroll Lateral */}
-        <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar touch-pan-x">
+        {/* Tabs Adaptativas: No celular vira Grid (2 colunas), no PC vira Linha */}
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 mt-4 px-1">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => { setActiveTab(tab.id); setCurrentPage(1); }}
-              className={`px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 shrink-0 ${activeTab === tab.id
-                ? 'bg-jucepe-secondary text-white shadow-md'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              className={`px-3 py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-between sm:justify-start gap-2 min-w-0 ${activeTab === tab.id
+                  ? 'bg-jucepe-secondary text-white shadow-md'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
             >
-              {tab.label}
-              <span className={`px-2 py-0.5 rounded-full text-[10px] ${activeTab === tab.id ? 'bg-white/20' : 'bg-gray-200'
+              {/* O truncate impede que o texto empurre a largura do botão */}
+              <span className="truncate">{tab.label}</span>
+
+              <span className={`px-1.5 py-0.5 rounded-full text-[10px] shrink-0 ${activeTab === tab.id ? 'bg-white/20' : 'bg-gray-200'
                 }`}>
                 {tab.count}
               </span>
@@ -289,17 +292,17 @@ const Documents = () => {
         </p>
 
         <div className="flex gap-2">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            icon={ChevronLeft} 
+          <Button
+            variant="ghost"
+            size="sm"
+            icon={ChevronLeft}
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
             disabled={currentPage === 1}
           />
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            icon={ChevronRight} 
+          <Button
+            variant="ghost"
+            size="sm"
+            icon={ChevronRight}
             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
           />
