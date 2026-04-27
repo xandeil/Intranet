@@ -2,13 +2,14 @@ import React from 'react';
 
 const Table = ({ columns, data, className = "" }) => {
   return (
-    <div className={`w-full overflow-x-auto rounded-jucepe border border-jucepe-light ${className}`}>
+    /* overflow-x-auto permite scroll no celular | overflow-hidden mantém as bordas arredondadas nos cantos */
+    <div className={`w-full overflow-x-auto rounded-jucepe border border-jucepe-light overflow-hidden ${className}`}>
       <table className="w-full text-sm text-left border-collapse">
         {/* Cabeçalho com o azul escuro da JUCEPE */}
         <thead className="bg-jucepe-dark text-white uppercase text-xs">
           <tr>
             {columns.map((col, index) => (
-              <th key={index} className="px-6 py-4 font-semibold tracking-wider">
+              <th key={index} className="px-6 py-4 font-semibold tracking-wider whitespace-nowrap">
                 {col.header}
               </th>
             ))}
