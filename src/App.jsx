@@ -54,7 +54,7 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1024);
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1024);
 
 
   const { isAuthenticated } = useAuth();
@@ -75,8 +75,8 @@ function App() {
             <ProtectedRoute>
               {/* Passamos isSidebarOpen e setIsSidebarOpen com os nomes exatos */}
               <Layout
-                isSidebarOpen={isSidebarOpen}
-                setIsSidebarOpen={setIsSidebarOpen}
+                // isSidebarOpen={isSidebarOpen}
+                // setIsSidebarOpen={setIsSidebarOpen}
               />
             </ProtectedRoute>
           }
@@ -120,12 +120,12 @@ function App() {
       </Routes>
 
       {/* Overlay (Fundo escuro) - Essencial para fechar o menu no celular */}
-      {isSidebarOpen && (
+      {/* {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
-      )}
+      )} */}
     </>
   );
 }
