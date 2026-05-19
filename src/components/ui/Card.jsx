@@ -1,13 +1,12 @@
 import React from 'react';
 
-// Um card padronizado que aceita qualquer conteúdo dentro (children)
 const Card = ({ children, title, icon: Icon, className = "", onClick }) => {
   return (
     <div 
       onClick={onClick}
       className={`
         bg-white 
-        rounded-jucepe 
+        rounded-2xl /* Usando classe padrão do Tailwind como fallback */
         shadow-card 
         p-4 sm:p-6 
         border border-jucepe-light 
@@ -21,7 +20,7 @@ const Card = ({ children, title, icon: Icon, className = "", onClick }) => {
       {(title || Icon) && (
         <div className="flex items-center gap-3 mb-4">
           {Icon && <Icon className="w-5 h-5 text-jucepe-secondary shrink-0" />}
-          {title && <h3 className="font-semibold text-jucepe-dark text-lg leading-tight">{title}</h3>}
+          {title && <h3 className="font-bold text-jucepe-dark text-base sm:text-lg leading-tight">{title}</h3>}
         </div>
       )}
 

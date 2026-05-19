@@ -19,6 +19,9 @@ export default {
           danger: '#ef4444',
         }
       },
+      borderRadius: {
+        'jucepe': '1rem', // 16px
+      },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
