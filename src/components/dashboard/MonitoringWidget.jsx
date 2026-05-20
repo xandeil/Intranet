@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Importação para navegação
 import {
   LineChart, Line, AreaChart, Area, XAxis, YAxis,
   CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import {
   Activity, Server, Database, Shield,
-  Globe, Cpu, HardDrive, RefreshCcw
+  Globe, Cpu, HardDrive, RefreshCcw, Monitor // Adicionei Monitor para o botão
 } from 'lucide-react';
 
 // IMPORTAÇÃO DO SEU DESIGN SYSTEM
@@ -24,6 +25,12 @@ const Monitoramento = () => {
     danger: "#ef4444",    // jucepe-danger
   };
 
+  // URLs do Grafana fornecidas pelo colega
+  const DASHBOARDS = {
+    chamados: "http://10.10.10.23:3000/d/14bf24d5-57f8-4fef-821a-9145007c41c5/chamados?orgId=1&kiosk&theme=light",
+    site: "http://10.10.10.23:3000/d/ba143049-3834-4b30-9406-7a1c0f16b09b/site-jucepe?orgId=1&kiosk&theme=light"
+  };
+
   return (
     <div className="space-y-6 pb-10">
       {/* Header com os botões do Design System */}
@@ -33,11 +40,21 @@ const Monitoramento = () => {
             <Activity className="w-7 h-7 text-jucepe-secondary" />
             Centro de Monitoramento
           </h1>
-          <p className="text-sm text-jucepe-dark/50 mt-1 italic">Status da infraestrutura em tempo real (Zabbix)</p>
+          <p className="text-sm text-jucepe-dark/50 mt-1 italic">Status da infraestrutura em tempo real (Zabbix/Grafana)</p>
         </div>
-        <Button variant="outline" icon={RefreshCcw} className="w-full md:w-auto">
-          Atualizar Agora
-        </Button>
+        
+        <div className="flex flex-col md:flex-row gap-3">
+          {/* BOTÃO ADICIONADO: Apontando para a página de monitoramento detalhado */}
+          <Link to="/monitoramento" className="w-full md:w-auto">
+            <Button variant="primary" icon={Monitor} className="w-full">
+              Ver Painéis Completos
+            </Button>
+          </Link>
+          
+          <Button variant="outline" icon={RefreshCcw} className="w-full md:w-auto" onClick={() => window.location.reload()}>
+            Atualizar Agora
+          </Button>
+        </div>
       </header>
 
       {/* Grid de Métricas usando o seu componente Card */}
@@ -50,10 +67,11 @@ const Monitoramento = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-1">
         
-        {/* Gráfico Principal usando o seu Card */}
+        {/* Gráfico Principal usando o seu Card - Agora com opção de Iframe do Grafana comentada abaixo caso queira trocar */}
         <div className="lg:col-span-2">
           <Card title="Histórico de Acessos e Sessões" icon={Activity}>
             <div className="h-[350px] w-full mt-4">
+              {/* Mantive o seu Recharts original como pedido */}
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData}>
                   <defs>
@@ -90,6 +108,10 @@ const Monitoramento = () => {
                   />
                 </AreaChart>
               </ResponsiveContainer>
+
+              {/* DICA: Para usar o Grafana real aqui, você substituiria o ResponsiveContainer por:
+                  <iframe src={DASHBOARDS.site} width="100%" height="100%" frameBorder="0" /> 
+              */}
             </div>
           </Card>
         </div>
