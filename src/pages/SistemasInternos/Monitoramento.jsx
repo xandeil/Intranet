@@ -42,7 +42,7 @@ const PainelZabbixJucepe = () => {
     {
       title: 'Link JUCEPE',
       icon: Globe,
-      url: 'http://10.10.10.23:3000/d/fe4fbbfa-5eba-4c68-b7eb-2971042cc3a4/link-jucepe',
+      url: 'http://10.10.10.23:3000/d/ba143049-3834-4b30-9406-7a1c0f16b09b/site-jucepe',
       subtitle: 'Monitoramento de tráfego de rede e latência da sede em tempo real.'
     },
     {
