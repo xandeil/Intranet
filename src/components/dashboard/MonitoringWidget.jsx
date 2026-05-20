@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Importação para navegação
+import { Link } from 'react-router-dom';
 import {
-  LineChart, Line, AreaChart, Area, XAxis, YAxis,
-  CartesianGrid, Tooltip, ResponsiveContainer
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import {
   Activity, Server, Database, Shield,
-  Globe, Cpu, HardDrive, RefreshCcw, Monitor // Adicionei Monitor para o botão
+  Globe, Cpu, HardDrive, RefreshCcw, Monitor, ExternalLink
 } from 'lucide-react';
 
 // IMPORTAÇÃO DO SEU DESIGN SYSTEM
@@ -16,62 +15,50 @@ import Badge from '../../components/ui/Badge';
 import { monitoringData, chartData } from '../../data/mockData.js';
 
 const Monitoramento = () => {
-  // Cores sincronizadas com seu tailwind.config.js
   const COLORS = {
-    primary: "#1e4a7e",   // jucepe-primary
-    secondary: "#2563eb", // jucepe-secondary
-    success: "#22c55e",   // jucepe-success
-    warning: "#f59e0b",   // jucepe-warning
-    danger: "#ef4444",    // jucepe-danger
-  };
-
-  // URLs do Grafana fornecidas pelo colega
-  const DASHBOARDS = {
-    chamados: "http://10.10.10.23:3000/d/14bf24d5-57f8-4fef-821a-9145007c41c5/chamados?orgId=1&kiosk&theme=light",
-    site: "http://10.10.10.23:3000/d/ba143049-3834-4b30-9406-7a1c0f16b09b/site-jucepe?orgId=1&kiosk&theme=light"
+    primary: "#1e4a7e",
+    secondary: "#2563eb",
+    success: "#22c55e",
   };
 
   return (
     <div className="space-y-6 pb-10">
-      {/* Header com os botões do Design System */}
+      {/* Header */}
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-1">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-jucepe-dark flex items-center gap-3">
             <Activity className="w-7 h-7 text-jucepe-secondary" />
             Centro de Monitoramento
           </h1>
-          <p className="text-sm text-jucepe-dark/50 mt-1 italic">Status da infraestrutura em tempo real (Zabbix/Grafana)</p>
+          <p className="text-sm text-jucepe-dark/50 mt-1 italic">Status da infraestrutura (Zabbix/Grafana)</p>
         </div>
-        
+
         <div className="flex flex-col md:flex-row gap-3">
-          {/* BOTÃO ADICIONADO: Apontando para a página de monitoramento detalhado */}
-          <Link to="/monitoramento" className="w-full md:w-auto">
+          <Link to="/monitoramento-detalhado" className="w-full md:w-auto">
             <Button variant="primary" icon={Monitor} className="w-full">
               Ver Painéis Completos
             </Button>
           </Link>
-          
-          <Button variant="outline" icon={RefreshCcw} className="w-full md:w-auto" onClick={() => window.location.reload()}>
+
+          <Button variant="outline" icon={RefreshCcw} onClick={() => window.location.reload()}>
             Atualizar Agora
           </Button>
         </div>
       </header>
 
-      {/* Grid de Métricas usando o seu componente Card */}
+    {/* Grid de Métricas */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-1">
-        <MetricCard icon={Cpu} label="Uso de CPU" value="24%" color="text-blue-600" bg="bg-blue-50" />
-        <MetricCard icon={HardDrive} label="Disco Livre" value="1.2 TB" color="text-green-600" bg="bg-green-50" />
-        <MetricCard icon={Globe} label="Usuários Ativos" value={monitoringData.users.value} color="text-purple-600" bg="bg-purple-50" />
-        <MetricCard icon={Database} label="Status DB" value="Online" color="text-emerald-600" bg="bg-emerald-50" />
-      </div>
+        <MetricCard icon={Monitor} label="INTRANET" value="100%" color="text-blue-600" bg="bg-blue-50" />
+        <MetricCard icon={RefreshCcw} label="Integridade de Cache" value="98.4%" color="text-green-600" bg="bg-green-50" />
+        <MetricCard icon={Activity} label="Latência DNS" value="14ms" color="text-purple-600" bg="bg-purple-50" />
+        <MetricCard icon={Shield} label="Ameaças Bloqueadas" value="0" color="text-emerald-600" bg="bg-emerald-50" />
+      </div>  
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-1">
-        
-        {/* Gráfico Principal usando o seu Card - Agora com opção de Iframe do Grafana comentada abaixo caso queira trocar */}
+        {/* Gráfico Principal */}
         <div className="lg:col-span-2">
-          <Card title="Histórico de Acessos e Sessões" icon={Activity}>
+          <Card title="Histórico de Acessos" icon={Activity}>
             <div className="h-[350px] w-full mt-4">
-              {/* Mantive o seu Recharts original como pedido */}
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData}>
                   <defs>
@@ -83,103 +70,104 @@ const Monitoramento = () => {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                   <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
                   <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
-                  <Tooltip
-                    contentStyle={{ 
-                      borderRadius: '16px', 
-                      border: 'none', 
-                      boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)',
-                      fontSize: '12px'
-                    }}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="users"
-                    stroke={COLORS.secondary}
-                    strokeWidth={3}
-                    fillOpacity={1}
-                    fill="url(#colorUsers)"
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="sessions"
-                    stroke={COLORS.success}
-                    strokeWidth={3}
-                    fill="transparent"
-                  />
+                  <Tooltip contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }} />
+                  <Area type="monotone" dataKey="users" stroke={COLORS.secondary} strokeWidth={3} fillOpacity={1} fill="url(#colorUsers)" />
                 </AreaChart>
               </ResponsiveContainer>
-
-              {/* DICA: Para usar o Grafana real aqui, você substituiria o ResponsiveContainer por:
-                  <iframe src={DASHBOARDS.site} width="100%" height="100%" frameBorder="0" /> 
-              */}
             </div>
           </Card>
         </div>
 
-        {/* Lado Direito: Status e Segurança */}
+        {/* Lado Direito: Atalhos e Status */}
         <div className="space-y-6">
-          <Card title="Status dos Ativos" icon={Server}>
+          <Card title="Atalhos do Servidor" icon={Server}>
             <div className="space-y-3 mt-2">
-              <StatusItem label="Web Server 01" status="success" />
-              <StatusItem label="API Gateway" status="success" />
-              <StatusItem label="Database Cluster" status="warning" />
-              <StatusItem label="Firewall FortiGate" status="success" />
-              <StatusItem label="Backup Cloud" status="danger" />
+              <a
+                href="http://10.10.10.23:3000/d/ba143049-3834-4b30-9406-7a1c0f16b09b/site-jucepe"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100 hover:border-blue-300 hover:bg-blue-50 transition-all group"
+              >
+                <span className="text-sm font-bold text-jucepe-dark/80 group-hover:text-blue-700">Link JUCEPE</span>
+                <Badge variant="success">Online</Badge>
+              </a>
+
+              <a
+                href="http://10.10.10.23:3000/d/14bf24d5-57f8-4fef-821a-9145007c41c5/chamados"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100 hover:border-blue-300 hover:bg-blue-50 transition-all group"
+              >
+                <span className="text-sm font-bold text-jucepe-dark/80 group-hover:text-blue-700">Gestão de Chamados</span>
+                <Badge variant="success">Online</Badge>
+              </a>
+
+              <a
+                href="http://10.10.10.23:3000/d/d9f82298-6691-472e-b676-ab5f050b5fab/certificados"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100 hover:border-blue-300 hover:bg-blue-50 transition-all group"
+              >
+                <span className="text-sm font-bold text-jucepe-dark/80 group-hover:text-blue-700">Certificados Digitais</span>
+                <Badge variant="success">Online</Badge>
+              </a>
             </div>
+
+            {/* BOTÃO ATUALIZADO COM O LINK DO GRAFANA */}
+            <a
+              href="http://10.10.10.23:3000/dashboards"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mt-6 p-4 bg-blue-600 rounded-xl text-white hover:bg-blue-700 transition-all shadow-md active:scale-95"
+            >
+              <p className="text-[10px] font-bold uppercase opacity-80 tracking-wider">Acesso Rápido</p>
+              <h5 className="font-bold">Todos os Dashboards</h5>
+              <div className="flex justify-between items-center mt-2 text-xs">
+                <span>Painéis disponíveis</span>
+                <Monitor size={16} />
+              </div>
+            </a>
           </Card>
 
-          {/* Card de Segurança com o Azul Escuro da JUCEPE */}
+          {/* Card de Segurança */}
           <div className="bg-jucepe-dark p-6 rounded-jucepe text-white shadow-lg relative overflow-hidden">
             <Shield className="absolute -right-4 -bottom-4 w-24 h-24 text-white/10" />
             <div className="relative z-10">
               <h4 className="font-bold mb-2 flex items-center gap-2">
-                <Shield size={18} className="text-jucepe-accent" />
-                Integridade do Sistema
+                <Shield size={18} className="text-green-400" />
+                Segurança Ativa
               </h4>
               <p className="text-blue-100/80 text-xs leading-relaxed italic">
-                Nenhuma vulnerabilidade crítica detectada nas últimas 24 horas. Certificados SSL atualizados.
+                Nenhuma vulnerabilidade detectada. Firewall FortiGate operacional.
               </p>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
 };
 
-// Sub-componente de Métrica refatorado para usar o padrão de Card
+// Sub-componentes
 const MetricCard = ({ icon: Icon, label, value, color, bg }) => (
-  <Card className="p-0 overflow-hidden">
+  <Card className="p-0 overflow-hidden border-none shadow-sm">
     <div className="flex items-center gap-4 p-5">
       <div className={`p-3 ${bg} ${color} rounded-xl shrink-0`}>
         <Icon size={24} />
       </div>
-      <div className="min-w-0">
-        <p className="text-jucepe-dark/40 text-[10px] font-bold uppercase tracking-widest truncate">{label}</p>
+      <div>
+        <p className="text-jucepe-dark/40 text-[10px] font-bold uppercase tracking-widest">{label}</p>
         <p className="text-xl font-bold text-jucepe-dark">{value}</p>
       </div>
     </div>
   </Card>
 );
 
-// Sub-componente de Status usando o seu componente Badge
-const StatusItem = ({ label, status }) => {
-  const statusMap = {
-    success: { label: 'Online', variant: 'success' },
-    warning: { label: 'Atenção', variant: 'warning' },
-    danger: { label: 'Offline', variant: 'danger' },
-  };
-
-  return (
-    <div className="flex items-center justify-between p-3 bg-jucepe-surface rounded-xl border border-jucepe-light/50">
-      <span className="text-sm font-bold text-jucepe-dark/80">{label}</span>
-      <Badge variant={statusMap[status].variant}>
-        <div className={`w-1.5 h-1.5 rounded-full mr-2 bg-current ${status === 'success' ? 'animate-pulse' : ''}`} />
-        {statusMap[status].label}
-      </Badge>
-    </div>
-  );
-};
+const StatusItem = ({ label, status }) => (
+  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100">
+    <span className="text-sm font-bold text-jucepe-dark/80">{label}</span>
+    <Badge variant="success">Online</Badge>
+  </div>
+);
 
 export default Monitoramento;
