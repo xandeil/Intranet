@@ -1,116 +1,110 @@
 import React from 'react';
-import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, 
-  PieChart, Pie, Cell, LineChart, Line 
-} from 'recharts';
-import { Activity, Clock, Users, Database } from 'lucide-react';
+import {
+  ExternalLink, Globe, ShieldCheck,
+  MessageSquare, Printer, Layout, Lock, Server
+} from 'lucide-react';
 
-// Dados fictícios para o pessoal de TI
-const performanceData = [
-  { name: 'Seg', prog: 45, redes: 32 },
-  { name: 'Ter', prog: 52, redes: 40 },
-  { name: 'Qua', prog: 48, redes: 55 },
-  { name: 'Qui', prog: 61, redes: 42 },
-  { name: 'Sex', prog: 55, redes: 38 },
-];
-
-const setorDistribui = [
-  { name: 'Programação', value: 60, color: '#1e3a8a' }, // Blue-900
-  { name: 'Redes/Infra', value: 40, color: '#3b82f6' }, // Blue-500
-];
-
-const StatCard = ({ icon: Icon, label, value, color }) => (
-  <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4">
-    <div className={`p-3 rounded-lg ${color}`}>
-      <Icon className="w-6 h-6 text-white" />
+const MonitoringLinkCard = ({ title, icon: Icon, url, subtitle }) => (
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group relative bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+  >
+    {/* Ícone e Indicador de Link Externo */}
+    <div className="flex justify-between items-start mb-4">
+      <div className="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-all">
+        <Icon size={28} />
+      </div>
+      <ExternalLink size={20} className="text-gray-300 group-hover:text-blue-500 transition-colors" />
     </div>
+
+    {/* Textos */}
     <div>
-      <p className="text-sm text-gray-500">{label}</p>
-      <h3 className="text-xl font-bold text-gray-800">{value}</h3>
+      <h3 className="text-xl font-bold text-gray-800 mb-1 group-hover:text-blue-700">
+        {title}
+      </h3>
+      <p className="text-sm text-gray-500 leading-relaxed">
+        {subtitle}
+      </p>
     </div>
-  </div>
+
+    {/* Rodapé do Card */}
+    <div className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+      <span>Acessar Painel Grafana</span>
+      <div className="h-[1px] flex-1 bg-blue-100"></div>
+    </div>
+  </a>
 );
 
-export default function Monitoramento() {
+const PainelZabbixJucepe = () => {
+  const dashboards = [
+    {
+      title: 'Link JUCEPE',
+      icon: Globe,
+      url: 'http://10.10.10.23:3000/d/fe4fbbfa-5eba-4c68-b7eb-2971042cc3a4/link-jucepe',
+      subtitle: 'Monitoramento de tráfego de rede e latência da sede em tempo real.'
+    },
+    {
+      title: 'Gestão de Chamados',
+      icon: MessageSquare,
+      url: 'http://10.10.10.23:3000/d/14bf24d5-57f8-4fef-821a-9145007c41c5/chamados',
+      subtitle: 'Visão geral dos tickets de suporte e tempo de atendimento.'
+    },
+    {
+      title: 'Impressoras',
+      icon: Printer,
+      url: 'http://10.10.10.23:3000/d/76bc16d6-f3b7-4b98-8284-ad2f07b2e6f6/impressoras',
+      subtitle: 'Status de conectividade e níveis de suprimento do parque de impressão.'
+    },
+    {
+      title: 'Certificados Digitais',
+      icon: ShieldCheck,
+      url: 'http://10.10.10.23:3000/d/d9f82298-6691-472e-b676-ab5f050b5fab/certificados',
+      subtitle: 'Alerta de vencimento e status de validade dos certificados.'
+    },
+    {
+      title: 'Site Institucional',
+      icon: Layout,
+      url: 'http://10.10.10.23:3000/d/ba143049-3834-4b30-9406-7a1c0f16b09b/site-jucepe',
+      subtitle: 'Disponibilidade externa e métricas de acesso ao portal principal.'
+    },
+    {
+      title: 'Squid Proxy',
+      icon: Lock,
+      url: 'http:///10.10.10.23:3000/public-dashboards/66a78ba612e74b7cafa2983137579e45',
+      subtitle: 'Relatórios de filtragem de pacotes e regras de firewall.'
+    },
+    {
+      title: 'Portal de Dashboards',
+      icon: Layout,
+      url: 'http://10.10.10.23:3000/dashboards',
+      subtitle: 'Acesso direto à biblioteca completa de monitoramento do servidor.'
+    }
+  ];
+
   return (
-    <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
-      {/* Cabeçalho */}
-      <header className="mb-8">
-        <h1 className="text-2xl font-bold text-blue-900">Monitoramento de Desempenho TI</h1>
-        <p className="text-gray-500 text-sm">Painel de métricas: Programação & Redes</p>
-      </header>
-
-      {/* Cards de Métricas Rápidas */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <StatCard icon={Clock} label="Total Horas/Sem" value="480h" color="bg-blue-600" />
-        <StatCard icon={Activity} label="Sprints Ativas" value="12" color="bg-indigo-600" />
-        <StatCard icon={Users} label="Colaboradores" value="18" color="bg-blue-900" />
-        <StatCard icon={Database} label="Uptime Servidores" value="99.9%" color="bg-cyan-600" />
+    <section className="p-8">
+      <div className="mb-8 border-l-4 border-blue-600 pl-4">
+        <h2 className="text-2xl font-black text-gray-800 uppercase tracking-tight italic">
+          Dashboards Externos
+        </h2>
+        <p className="text-gray-500">Clique para abrir o monitoramento detalhado no servidor Grafana</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        {/* Gráfico de Barras - Produção Diária */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-          <h2 className="text-lg font-semibold mb-4 text-gray-700">Produção Diária (Tarefas)</h2>
-          <div className="h-80 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={performanceData}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip cursor={{fill: '#f1f5f9'}} />
-                <Legend />
-                <Bar dataKey="prog" name="Programação" fill="#1e3a8a" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="redes" name="Redes" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        {/* Gráfico de Pizza - Distribuição de Carga */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-          <h2 className="text-lg font-semibold mb-4 text-gray-700">Carga de Trabalho por Setor</h2>
-          <div className="h-80 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={setorDistribui}
-                  innerRadius={60}
-                  outerRadius={100}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {setorDistribui.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip />
-                <Legend verticalAlign="bottom" height={36}/>
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-          <p className="text-xs text-center text-gray-400 mt-2 italic">Valores baseados em tickets fechados no mês</p>
-        </div>
-
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {dashboards.map((dash, index) => (
+          <MonitoringLinkCard
+            key={index}
+            title={dash.title}
+            icon={dash.icon}
+            url={dash.url}
+            subtitle={dash.subtitle}
+          />
+        ))}
       </div>
-
-      {/* Gráfico de Linha - Uptime/Estabilidade */}
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-        <h2 className="text-lg font-semibold mb-4 text-gray-700">Tendência de Estabilidade do Sistema (%)</h2>
-        <div className="h-64 w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={performanceData}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="name" />
-              <YAxis domain={[90, 100]} />
-              <Tooltip />
-              <Line type="monotone" dataKey="prog" stroke="#1e3a8a" strokeWidth={3} dot={{ r: 6 }} />
-              <Line type="monotone" dataKey="redes" stroke="#3b82f6" strokeWidth={3} strokeDasharray="5 5" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-    </div>
+    </section>
   );
-}
+};
+
+export default PainelZabbixJucepe;
