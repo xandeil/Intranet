@@ -80,7 +80,9 @@ const Header = ({ onMenuToggle, isSidebarOpen }) => {
 
           {/* Caixinha estilo Facebook */}
           {showNotifications && (
-            <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 overflow-hidden text-gray-800">
+            /* AJUSTE AQUI: Adicionado fixed inset-x-4 para mobile e sm:absolute para desktop */
+            <div className="fixed inset-x-4 top-16 mx-auto mt-2 w-auto sm:absolute sm:right-0 sm:inset-x-auto sm:w-80 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 overflow-hidden text-gray-800">
+              {/* <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 overflow-hidden text-gray-800"> */}
               <div className="p-4 border-b border-gray-100 font-bold">
                 Notificações
               </div>
