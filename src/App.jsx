@@ -54,7 +54,8 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1024);
+  /* REATIVADO: Estado essencial para a Sidebar funcionar e não dar erro de função */
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1024);
 
 
   const { isAuthenticated } = useAuth();
@@ -73,10 +74,10 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              {/* Passamos isSidebarOpen e setIsSidebarOpen com os nomes exatos */}
+              {/* ATUALIZADO: Agora passamos as props que estavam comentadas */}
               <Layout
-                // isSidebarOpen={isSidebarOpen}
-                // setIsSidebarOpen={setIsSidebarOpen}
+                isSidebarOpen={isSidebarOpen}
+                setIsSidebarOpen={setIsSidebarOpen}
               />
             </ProtectedRoute>
           }
@@ -119,13 +120,13 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {/* Overlay (Fundo escuro) - Essencial para fechar o menu no celular */}
-      {/* {isSidebarOpen && (
+      {/* Overlay (Fundo escuro) - REATIVADO para permitir fechar o menu no celular ao clicar fora */}
+      {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
-      )} */}
+      )}
     </>
   );
 }

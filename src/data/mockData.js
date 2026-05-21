@@ -82,15 +82,16 @@ export const chartData = [
 ];
 
 export const quickAccessItems = [
-  { id: 1, icon: 'Calendar', label: 'Agenda do Presidente', color: 'bg-blue-100 text-blue-600' },
-  { id: 2, icon: 'Image', label: 'Galeria de Fotos', color: 'bg-purple-100 text-purple-600' },
-  { id: 3, icon: 'Newspaper', label: 'Gerenciador de Notícias', subtitle: 'RH e Imprensa', color: 'bg-green-100 text-green-600' },
-  { id: 4, icon: 'Users', label: 'Permissões de Usuário', color: 'bg-orange-100 text-orange-600' },
-  { id: 5, icon: 'Database', label: 'Extração de Dados', color: 'bg-indigo-100 text-indigo-600' },
-  { id: 6, icon: 'Package', label: 'Inventário Almoxarifado', color: 'bg-red-100 text-red-600' },
-  { id: 7, icon: 'Monitor', label: 'Gerenciador de Saída de Equipamentos', color: 'bg-cyan-100 text-cyan-600' },
-  { id: 8, icon: 'Shield', label: 'Controle de Uso da Plenária', color: 'bg-teal-100 text-teal-600' },
-  { id: 9, icon: 'Gift', label: 'Lista de Aniversariantes', subtitle: 'RH', color: 'bg-pink-100 text-pink-600' }
+  { id: 1, icon: 'Calendar', label: 'Agenda do Presidente', path: '/agenda', color: 'bg-blue-100 text-blue-600' },
+  { id: 2, icon: 'Image', label: 'Galeria de Fotos', path: '/galeria', color: 'bg-purple-100 text-purple-600' },
+  { id: 3, icon: 'Newspaper', label: 'Gerenciador de Notícias', subtitle: 'RH e Imprensa', path: '/noticias', color: 'bg-green-100 text-green-600' },
+  { id: 4, icon: 'Users', label: 'Permissões de Usuário', path: '/permissoes', color: 'bg-orange-100 text-orange-600' },
+  { id: 5, icon: 'Database', label: 'Extração de Dados', path: '/extracao', color: 'bg-indigo-100 text-indigo-600' },
+  { id: 6, icon: 'Package', label: 'Inventário Almoxarifado', path: '/almoxarifado', color: 'bg-red-100 text-red-600' },
+  { id: 7, icon: 'Monitor', label: 'Saída de Equipamentos', path: '/equipamentos', color: 'bg-cyan-100 text-cyan-600' },
+  { id: 8, icon: 'Shield', label: 'Controle da Plenária', path: '/plenaria', color: 'bg-teal-100 text-teal-600' },
+  { id: 9, icon: 'Gift', label: 'Lista de Aniversariantes', subtitle: 'RH', path: '/aniversariantes', color: 'bg-pink-100 text-pink-600' },
+  { id: 10, icon: 'spreadsheet', label: 'Centro de Monitoramento', path: '/monitoramento', color: 'background-color: var(--color-black);' }
 ];
 
 export const recentActivities = [
