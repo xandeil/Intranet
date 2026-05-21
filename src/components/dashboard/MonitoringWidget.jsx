@@ -34,7 +34,7 @@ const Monitoramento = () => {
         </div>
 
         <div className="flex flex-col md:flex-row gap-3">
-          <Link to="/monitoramento-detalhado" className="w-full md:w-auto">
+          <Link to="/monitoramento" className="w-full md:w-auto">
             <Button variant="primary" icon={Monitor} className="w-full">
               Ver Painéis Completos
             </Button>
