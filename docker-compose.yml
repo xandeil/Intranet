@@ -1,0 +1,7 @@
+services:
+  intranet:
+    build: .
+    container_name: jucepe-intranet
+    ports:
+      - "5172:80"
+    restart: unless-stopped
