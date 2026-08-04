@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Camera, Save, X, User, Mail, Building, Briefcase, MapPin } from 'lucide-react';
 import { userData } from '../../data/mockData';
+import { ROUTES } from '../../config/routes.js';
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export default function EditProfile() {
     // Aqui no futuro você faria o "fetch" para o Back-end
     console.log("Dados salvos:", { ...formData, avatar: avatarPreview });
     alert("Perfil atualizado com sucesso! (Simulação)");
-    navigate('/perfil');
+    navigate(ROUTES.perfil);
   };
 
   return (
@@ -55,7 +56,7 @@ export default function EditProfile() {
             <p className="text-gray-500 text-sm">Atualize suas informações profissionais na JUCEPE</p>
           </div>
           <button 
-            onClick={() => navigate('/perfil')}
+            onClick={() => navigate(ROUTES.perfil)}
             className="p-2 bg-white border border-gray-200 rounded-full text-gray-400 hover:text-red-500 transition-colors"
           >
             <X size={24} />
@@ -175,7 +176,7 @@ export default function EditProfile() {
             </button>
             <button 
               type="button"
-              onClick={() => navigate('/perfil')}
+              onClick={() => navigate(ROUTES.perfil)}
               className="px-8 py-4 bg-white text-gray-500 font-bold rounded-2xl border border-gray-200 hover:bg-gray-50 transition-all"
             >
               Cancelar

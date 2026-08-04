@@ -13,6 +13,7 @@ import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import Badge from '../../components/ui/Badge';
 import { monitoringData, chartData } from '../../data/mockData.js';
+import { ROUTES } from '../../config/routes.js';
 
 const Monitoramento = () => {
   const COLORS = {
@@ -34,7 +35,7 @@ const Monitoramento = () => {
         </div>
 
         <div className="flex flex-col md:flex-row gap-3">
-          <Link to="/monitoramento" className="w-full md:w-auto">
+          <Link to={ROUTES.monitoramento} className="w-full md:w-auto">
             <Button variant="primary" icon={Monitor} className="w-full">
               Ver Painéis Completos
             </Button>

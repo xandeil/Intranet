@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { userData } from '../../data/mockData.js';
+import { ROUTES } from '../../config/routes.js';
 import { Link } from 'react-router-dom';
 
 const Header = ({ onMenuToggle, isSidebarOpen }) => {
@@ -39,7 +40,7 @@ const Header = ({ onMenuToggle, isSidebarOpen }) => {
         <div className="flex items-center gap-3">
           {/* O Link envolve o texto para torná-lo clicável */}
           <Link
-            to="/"
+            to={ROUTES.dashboard}
             className="hidden md:block text-sm text-blue-200 font-medium border-l border-blue-400 pl-3 hover:text-white transition-colors cursor-pointer"
           >
             Intranet Gov
@@ -144,7 +145,7 @@ const Header = ({ onMenuToggle, isSidebarOpen }) => {
 
               {/* LINK PARA PERFIL */}
               <Link
-                to="/perfil"
+                to={ROUTES.perfil}
                 onClick={() => setShowUserMenu(false)} // Fecha o menu ao clicar
                 className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
               >
@@ -154,7 +155,7 @@ const Header = ({ onMenuToggle, isSidebarOpen }) => {
 
               {/* LINK PARA CONFIGURAÇÕES */}
               <Link
-                to="/configuracoes"
+                to={ROUTES.configuracoes}
                 onClick={() => setShowUserMenu(false)} // Fecha o menu ao clicar
                 className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
               >

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Gift, Image as ImageIcon, ChevronRight } from 'lucide-react';
 import { birthdayList, photoGallery } from '../../data/mockData.js';
+import { ROUTES } from '../../config/routes.js';
 
 const RHSocialWidget = () => {
   return (
@@ -12,7 +13,7 @@ const RHSocialWidget = () => {
 
         {/* Link para a página de aniversariantes que criamos */}
         <Link
-          to="/aniversariantes"
+          to={ROUTES.aniversariantes}
           className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1 transition-colors"
         >
           Ver todos

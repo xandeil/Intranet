@@ -18,13 +18,19 @@ import {
   ChevronDown,
   ChevronUp,
   Headphones,
+  Image,
+  Package,
+  Monitor,
+  Shield,
   X
 } from 'lucide-react';
 import { navigationSections } from '../../data/mockData.js';
+import { ROUTES } from '../../config/routes.js';
 
 const iconMap = {
   Home, FileText, BookOpen, Mail, Settings, User, Gift, Calendar,
-  Layers, BarChart3, Activity, FileBarChart, Clock, Timer
+  Layers, BarChart3, Activity, FileBarChart, Clock, Timer,
+  Image, Package, Monitor, Shield
 };
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -41,6 +47,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   const [expandedSections, setExpandedSections] = useState({
     'NAVEGAÇÃO': true,
     'RH & COMUNICAÇÃO': true,
+    'OPERACIONAL': true,
     'SISTEMAS INTERNOS': true,
     'RELATÓRIOS': true
   });
@@ -74,7 +81,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       {/* Logo Area */}
       <div className="h-16 flex items-center px-6 bg-jucepe-primary border-b border-blue-800 flex-shrink-0">
         <Link
-          to="/"
+          to={ROUTES.dashboard}
           className="text-xl font-bold tracking-wider text-white hover:opacity-80 transition-opacity cursor-pointer"
         >
           JUCEPE

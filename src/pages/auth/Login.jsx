@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { ROUTES } from '../../config/routes.js';
 import { Building2, Lock, User, Eye, EyeOff, Server } from 'lucide-react';
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
 
     try {
       await login(formData.username, formData.password, formData.authType);
-      navigate('/');
+      navigate(ROUTES.dashboard);
     } catch (err) {
       setError('Credenciais inválidas. Por favor, tente novamente.');
     } finally {

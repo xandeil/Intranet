@@ -1,5 +1,7 @@
 // Dados mockados para a Intranet JUCEPE
 
+import { ROUTES } from '../config/routes.js';
+
 export const summaryData = {
   documents: { count: 24, label: 'novos', description: 'Acesse e publique documentos' },
   schedules: { count: 5, label: 'próximos', description: 'Planeje e acompanhe prazos' },
@@ -82,16 +84,20 @@ export const chartData = [
 ];
 
 export const quickAccessItems = [
-  { id: 1, icon: 'Calendar', label: 'Agenda do Presidente', path: '/agenda', color: 'bg-blue-100 text-blue-600' },
-  { id: 2, icon: 'Image', label: 'Galeria de Fotos', path: '/galeria', color: 'bg-purple-100 text-purple-600' },
-  { id: 3, icon: 'Newspaper', label: 'Gerenciador de Notícias', subtitle: 'RH e Imprensa', path: '/noticias', color: 'bg-green-100 text-green-600' },
-  { id: 4, icon: 'Users', label: 'Permissões de Usuário', path: '/permissoes', color: 'bg-orange-100 text-orange-600' },
-  { id: 5, icon: 'Database', label: 'Extração de Dados', path: '/extracao', color: 'bg-indigo-100 text-indigo-600' },
-  { id: 6, icon: 'Package', label: 'Inventário Almoxarifado', path: '/almoxarifado', color: 'bg-red-100 text-red-600' },
-  { id: 7, icon: 'Monitor', label: 'Saída de Equipamentos', path: '/equipamentos', color: 'bg-cyan-100 text-cyan-600' },
-  { id: 8, icon: 'Shield', label: 'Controle da Plenária', path: '/plenaria', color: 'bg-teal-100 text-teal-600' },
-  { id: 9, icon: 'Gift', label: 'Lista de Aniversariantes', subtitle: 'RH', path: '/aniversariantes', color: 'bg-pink-100 text-pink-600' },
-  { id: 10, icon: 'spreadsheet', label: 'Centro de Monitoramento', path: '/monitoramento', color: 'background-color: var(--color-black);' }
+  // Aponta para a página da Presidência, que já contém a agenda do dia
+  { id: 1, icon: 'Calendar', label: 'Agenda do Presidente', path: ROUTES.presidente, color: 'bg-blue-100 text-blue-600' },
+  { id: 2, icon: 'Image', label: 'Galeria de Fotos', path: ROUTES.galeria, color: 'bg-purple-100 text-purple-600' },
+  // Gerenciador de notícias = página de Publicações (RH e Imprensa)
+  { id: 3, icon: 'Newspaper', label: 'Gerenciador de Notícias', subtitle: 'RH e Imprensa', path: ROUTES.publicacoes, color: 'bg-green-100 text-green-600' },
+  // Permissões de usuário vivem dentro do módulo de Administração
+  { id: 4, icon: 'Users', label: 'Permissões de Usuário', path: ROUTES.admin, color: 'bg-orange-100 text-orange-600' },
+  // Extração de dados = Central de Relatórios
+  { id: 5, icon: 'Database', label: 'Extração de Dados', path: ROUTES.relatorios, color: 'bg-indigo-100 text-indigo-600' },
+  { id: 6, icon: 'Package', label: 'Inventário Almoxarifado', path: ROUTES.almoxarifado, color: 'bg-red-100 text-red-600' },
+  { id: 7, icon: 'Monitor', label: 'Saída de Equipamentos', path: ROUTES.equipamentos, color: 'bg-cyan-100 text-cyan-600' },
+  { id: 8, icon: 'Shield', label: 'Controle da Plenária', path: ROUTES.plenaria, color: 'bg-teal-100 text-teal-600' },
+  { id: 9, icon: 'Gift', label: 'Lista de Aniversariantes', subtitle: 'RH', path: ROUTES.aniversariantes, color: 'bg-pink-100 text-pink-600' },
+  { id: 10, icon: 'Activity', label: 'Centro de Monitoramento', path: ROUTES.monitoramento, color: 'bg-slate-100 text-slate-600' }
 ];
 
 export const recentActivities = [
@@ -160,35 +166,44 @@ export const navigationSections = [
   {
     title: 'NAVEGAÇÃO',
     items: [
-      { id: 'inicio', label: 'Início', icon: 'Home', path: '/' },
-      { id: 'documentos', label: 'Documentos', icon: 'FileText', path: '/documentos' },
-      { id: 'publicacoes', label: 'Publicações', icon: 'BookOpen', path: '/publicacoes' },
-      { id: 'contato', label: 'Contato', icon: 'Mail', path: '/contato' },
-      { id: 'admin', label: 'Administração', icon: 'Settings', path: '/admin' }
+      { id: 'inicio', label: 'Início', icon: 'Home', path: ROUTES.dashboard },
+      { id: 'documentos', label: 'Documentos', icon: 'FileText', path: ROUTES.documentos },
+      { id: 'publicacoes', label: 'Publicações', icon: 'BookOpen', path: ROUTES.publicacoes },
+      { id: 'contato', label: 'Contato', icon: 'Mail', path: ROUTES.contato },
+      { id: 'admin', label: 'Administração', icon: 'Settings', path: ROUTES.admin }
     ]
   },
   {
     title: 'RH & COMUNICAÇÃO',
     items: [
-      { id: 'presidente', label: 'Presidente', icon: 'User', path: '/presidente' },
-      { id: 'aniversariantes', label: 'Aniversariantes', icon: 'Gift', path: '/aniversariantes' },
-      { id: 'cronogramas', label: 'Cronogramas', icon: 'Calendar', path: '/cronogramas' }
+      { id: 'presidente', label: 'Presidente', icon: 'User', path: ROUTES.presidente },
+      { id: 'aniversariantes', label: 'Aniversariantes', icon: 'Gift', path: ROUTES.aniversariantes },
+      { id: 'cronogramas', label: 'Cronogramas', icon: 'Calendar', path: ROUTES.cronogramas },
+      { id: 'galeria', label: 'Galeria de Fotos', icon: 'Image', path: ROUTES.galeria }
+    ]
+  },
+  {
+    title: 'OPERACIONAL',
+    items: [
+      { id: 'almoxarifado', label: 'Almoxarifado', icon: 'Package', path: ROUTES.almoxarifado },
+      { id: 'equipamentos', label: 'Saída de Equipamentos', icon: 'Monitor', path: ROUTES.equipamentos },
+      { id: 'plenaria', label: 'Controle da Plenária', icon: 'Shield', path: ROUTES.plenaria }
     ]
   },
   {
     title: 'SISTEMAS INTERNOS',
     items: [
-      { id: 'sistemas', label: 'Sistemas Internos', icon: 'Layers', path: '/sistemas' },
-      { id: 'powerbi', label: 'Power BI', icon: 'BarChart3', path: '/powerbi' },
-      { id: 'monitoramento', label: 'Monitoramento', icon: 'Activity', path: '/monitoramento' }
+      { id: 'sistemas', label: 'Sistemas Internos', icon: 'Layers', path: ROUTES.sistemas },
+      { id: 'powerbi', label: 'Power BI', icon: 'BarChart3', path: ROUTES.powerbi },
+      { id: 'monitoramento', label: 'Monitoramento', icon: 'Activity', path: ROUTES.monitoramento }
     ]
   },
   {
     title: 'RELATÓRIOS',
     items: [
-      { id: 'relatorios', label: 'Relatórios', icon: 'FileBarChart', path: '/relatorios' },
-      { id: 'ponto', label: 'Ponto Online', icon: 'Clock', path: '/ponto' },
-      { id: 'timesheet', label: 'Timesheet JUCEPE', icon: 'Timer', path: '/timesheet' }
+      { id: 'relatorios', label: 'Relatórios', icon: 'FileBarChart', path: ROUTES.relatorios },
+      { id: 'ponto', label: 'Ponto Online', icon: 'Clock', path: ROUTES.ponto },
+      { id: 'timesheet', label: 'Timesheet JUCEPE', icon: 'Timer', path: ROUTES.timesheet }
     ]
   }
 ];

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FileText, Calendar, Link as LinkIcon, Gift, Megaphone, ChevronRight } from 'lucide-react'
 import { recentActivities } from '../../data/mockData.js';
+import { ROUTES } from '../../config/routes.js';
 import { Link } from 'react-router-dom';
 
 const iconMap = {
@@ -20,7 +21,7 @@ const RecentActivities = () => {
 
         {/* Link para a página de aniversariantes que criamos */}
         <Link
-          to="/monitoramento"
+          to={ROUTES.monitoramento}
           className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1 transition-colors"
         >
           Ver todos

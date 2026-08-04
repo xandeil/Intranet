@@ -15,7 +15,7 @@ import {
 import { importantLinks } from '../../data/mockData.js';
 
 const iconMap = {
-  Globe, Building, FileCheck, Leaf, Mail, Server, Phone, Clock, FileSpreadsheet
+  Globe, Building, FileCheck, Leaf, Mail, Server, Phone, Clock, FileSpreadsheet, TestTube, History
 };
 
 const ImportantLinks = () => {

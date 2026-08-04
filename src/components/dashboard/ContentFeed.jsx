@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { publications } from '../../data/mockData.js';
+import { ROUTES } from '../../config/routes.js';
 import { Link } from 'react-router-dom';
 
 const ContentFeed = () => {
@@ -28,8 +29,8 @@ const ContentFeed = () => {
     <h2 className="section-title">Publicações de Conteúdo</h2>
     
     {/* Trocamos o button pelo Link para funcionar a navegação */}
-    <Link 
-      to="/publicacoes" 
+    <Link
+      to={ROUTES.publicacoes}
       className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1 transition-colors"
     >
       Ver todas

@@ -4,6 +4,7 @@ import {
   Phone, Calendar, Briefcase, Award, Edit3
 } from 'lucide-react';
 import { userData } from '../../data/mockData';
+import { ROUTES } from '../../config/routes.js';
 import { Link } from 'react-router-dom';
 
 export default function Profile() {
@@ -45,7 +46,7 @@ export default function Profile() {
 
               <div className="flex gap-3 mb-2">
                 <button className="bg-blue-900 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 flex items-center gap-2">
-                  <Link to="/perfil/editar" className="bg-blue-900 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 flex items-center gap-2">
+                  <Link to={ROUTES.perfilEditar} className="bg-blue-900 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 flex items-center gap-2">
                     <Edit3 size={18} /> Editar Perfil
                   </Link>
                 </button>

@@ -1,22 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AlertCircle, Home } from 'lucide-react';
+import { ShieldAlert, Home } from 'lucide-react';
 import { ROUTES } from '../../config/routes.js';
 
-const NotFound = () => {
+const Forbidden = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="text-center max-w-md">
-        <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <AlertCircle className="w-12 h-12 text-red-500" />
+        <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <ShieldAlert className="w-12 h-12 text-yellow-500" />
         </div>
-        
-        <h1 className="text-6xl font-bold text-gray-300 mb-4">404</h1>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Página não encontrada</h2>
+
+        <h1 className="text-6xl font-bold text-gray-300 mb-4">403</h1>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Acesso não autorizado</h2>
         <p className="text-gray-500 mb-8">
-          A página que você está procurando não existe ou foi movida.
+          Seu perfil não tem permissão para acessar esta área. Entre em contato com um administrador se acredita que isso é um engano.
         </p>
-        
+
         <Link
           to={ROUTES.dashboard}
           className="inline-flex items-center gap-2 px-6 py-3 bg-jucepe-secondary text-white rounded-lg font-medium hover:bg-jucepe-primary transition-colors"
@@ -29,4 +29,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Forbidden;
