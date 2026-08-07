@@ -14,7 +14,7 @@ export const publications = [
     id: 1,
     category: 'RH',
     categoryColor: 'bg-purple-100 text-purple-700',
-    title: 'R$ 6,6 mm cobrar pero para para ho do RSD...',
+    title: 'Novo plano de benefícios e diretrizes de RH para 2026',
     date: 'Hoje',
     image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=250&fit=crop',
     excerpt: 'Novas diretrizes para gestão de recursos humanos e benefícios.'
@@ -23,7 +23,7 @@ export const publications = [
     id: 2,
     category: 'Imprensa',
     categoryColor: 'bg-blue-100 text-blue-700',
-    title: 'Entramadecenças para comparante espacie...',
+    title: 'JUCEPE firma nova parceria institucional com o Governo de Pernambuco',
     date: 'Ontem',
     image: 'https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?w=400&h=250&fit=crop',
     excerpt: 'Comunicado oficial sobre novas parcerias institucionais.'
@@ -32,7 +32,7 @@ export const publications = [
     id: 3,
     category: 'Presidência',
     categoryColor: 'bg-green-100 text-green-700',
-    title: 'Precisões intensesestes notícias em Siit et',
+    title: 'Diretoria aprova novas diretrizes estratégicas para 2026',
     date: '2 dias atrás',
     image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=250&fit=crop',
     excerpt: 'Decisões estratégicas da diretoria executiva.'
@@ -41,7 +41,7 @@ export const publications = [
     id: 4,
     category: 'Administração',
     categoryColor: 'bg-orange-100 text-orange-700',
-    title: 'Novos processos de licitação para 2024',
+    title: 'Novos processos de licitação para 2026',
     date: '3 dias atrás',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop',
     excerpt: 'Atualização nos procedimentos administrativos.'
@@ -49,10 +49,10 @@ export const publications = [
 ];
 
 export const birthdayList = [
-  { id: 1, name: 'Anulia Reito', date: 'Hoje', avatar: 'https://i.pravatar.cc/150?img=1', status: 'today' },
-  { id: 2, name: 'Romelal Rivora', date: 'Amanhã', avatar: 'https://i.pravatar.cc/150?img=2', status: 'tomorrow' },
-  { id: 3, name: 'Lienos Santana', date: 'Em 3 dias', avatar: 'https://i.pravatar.cc/150?img=3', status: 'upcoming' },
-  { id: 4, name: 'Jouseul Feira', date: 'Em 5 dias', avatar: 'https://i.pravatar.cc/150?img=4', status: 'upcoming' }
+  { id: 1, name: 'Camila Ferreira', date: 'Hoje', avatar: 'https://i.pravatar.cc/150?img=1', status: 'today' },
+  { id: 2, name: 'Rafael Oliveira', date: 'Amanhã', avatar: 'https://i.pravatar.cc/150?img=2', status: 'tomorrow' },
+  { id: 3, name: 'Beatriz Andrade', date: 'Em 3 dias', avatar: 'https://i.pravatar.cc/150?img=3', status: 'upcoming' },
+  { id: 4, name: 'Lucas Barbosa', date: 'Em 5 dias', avatar: 'https://i.pravatar.cc/150?img=4', status: 'upcoming' }
 ];
 
 export const photoGallery = [
@@ -104,7 +104,7 @@ export const recentActivities = [
   {
     id: 1,
     type: 'document',
-    title: 'Novo documento publicado: Relatório Mensal - Maio/2024',
+    title: 'Novo documento publicado: Relatório Mensal - Maio/2026',
     author: 'Maria Silva',
     time: 'Há 1 hora',
     icon: 'FileText',
@@ -179,7 +179,8 @@ export const navigationSections = [
       { id: 'presidente', label: 'Presidente', icon: 'User', path: ROUTES.presidente },
       { id: 'aniversariantes', label: 'Aniversariantes', icon: 'Gift', path: ROUTES.aniversariantes },
       { id: 'cronogramas', label: 'Cronogramas', icon: 'Calendar', path: ROUTES.cronogramas },
-      { id: 'galeria', label: 'Galeria de Fotos', icon: 'Image', path: ROUTES.galeria }
+      { id: 'galeria', label: 'Galeria de Fotos', icon: 'Image', path: ROUTES.galeria },
+      { id: 'colaboradores', label: 'Quem é Quem', icon: 'Users', path: ROUTES.colaboradores }
     ]
   },
   {
@@ -195,7 +196,8 @@ export const navigationSections = [
     items: [
       { id: 'sistemas', label: 'Sistemas Internos', icon: 'Layers', path: ROUTES.sistemas },
       { id: 'powerbi', label: 'Power BI', icon: 'BarChart3', path: ROUTES.powerbi },
-      { id: 'monitoramento', label: 'Monitoramento', icon: 'Activity', path: ROUTES.monitoramento }
+      { id: 'monitoramento', label: 'Monitoramento', icon: 'Activity', path: ROUTES.monitoramento },
+      { id: 'chamados', label: 'Central de Chamados', icon: 'Headphones', path: ROUTES.chamados }
     ]
   },
   {

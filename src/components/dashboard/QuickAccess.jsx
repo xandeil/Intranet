@@ -16,23 +16,26 @@ const iconMap = {
 const QuickAccess = () => {
   return (
     <Card title="Acesso Rápido" icon={LayoutGrid} className="rounded-2xl overflow-hidden border-none shadow-sm">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 p-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-1">
         {quickAccessItems.map((item) => {
           const IconComponent = iconMap[item.icon] || Database;
-          
+
           return (
             /* TROCAMOS button POR Link E ADICIONAMOS O to={item.path} */
             <Link
               key={item.id}
               to={item.path}
+              title={item.label}
               className="flex items-center gap-3 p-3 rounded-xl border border-jucepe-light bg-white hover:border-jucepe-secondary/40 hover:shadow-md transition-all duration-300 group text-left"
             >
               <div className={`flex items-center justify-center w-10 h-10 rounded-lg ${item.color.replace('bg-', 'bg-opacity-10 bg-')} ${item.color.replace('bg-', 'text-')} shrink-0`}>
                 <IconComponent className="w-5 h-5" />
               </div>
-              
+
               <div className="flex-1 min-w-0">
-                <p className="text-xs sm:text-sm font-bold text-jucepe-dark leading-tight group-hover:text-jucepe-secondary transition-colors truncate">
+                {/* line-clamp-2 (em vez de truncate) deixa o texto quebrar em até 2 linhas
+                    ao invés de cortar com "..." — mesmo padrão usado em ContentFeed/Publications */}
+                <p className="text-xs sm:text-sm font-bold text-jucepe-dark leading-tight group-hover:text-jucepe-secondary transition-colors line-clamp-2">
                   {item.label}
                 </p>
                 <p className="text-[10px] text-jucepe-dark/40 font-bold uppercase tracking-tighter">

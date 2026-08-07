@@ -31,6 +31,7 @@ const segments = {
   aniversariantes: env.VITE_ROUTE_ANIVERSARIANTES || 'aniversariantes',
   cronogramas: env.VITE_ROUTE_CRONOGRAMAS || 'cronogramas',
   galeria: env.VITE_ROUTE_GALERIA || 'galeria',
+  colaboradores: env.VITE_ROUTE_COLABORADORES || 'colaboradores',
 
   almoxarifado: env.VITE_ROUTE_ALMOXARIFADO || 'almoxarifado',
   equipamentos: env.VITE_ROUTE_EQUIPAMENTOS || 'equipamentos',
@@ -40,6 +41,7 @@ const segments = {
   sistemasLinks: env.VITE_ROUTE_SISTEMAS_LINKS || 'sistemas/links',
   powerbi: env.VITE_ROUTE_POWERBI || 'powerbi',
   monitoramento: env.VITE_ROUTE_MONITORAMENTO || 'monitoramento',
+  chamados: env.VITE_ROUTE_CHAMADOS || 'chamados',
 
   relatorios: env.VITE_ROUTE_RELATORIOS || 'relatorios',
   ponto: env.VITE_ROUTE_PONTO || 'ponto',

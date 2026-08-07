@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { ROUTES } from '../../config/routes.js';
-import { Building2, Lock, User, Eye, EyeOff, Server } from 'lucide-react';
+import { Lock, User, Eye, EyeOff, Server } from 'lucide-react';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,8 +36,8 @@ const Login = () => {
       <div className="w-full max-w-md">
         {/* Logo Section */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-lg mb-4">
-            <Building2 className="w-10 h-10 text-jucepe-primary" />
+          <div className="inline-flex items-center justify-center px-6 py-4 bg-white rounded-2xl shadow-lg mb-4">
+            <img src="/logo.png" alt="JUCEPE" className="h-10 w-auto" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">INTRANET</h1>
           <p className="text-blue-200">Junta Comercial de Pernambuco</p>

@@ -21,10 +21,10 @@ const Aniversariantes = () => {
   ];
 
   const aniversariantes = [
-    { id: 1, name: 'Anulia Reito', date: '15/05', day: 15, month: 4, department: 'Presidência', avatar: 'https://i.pravatar.cc/150?img=1', email: 'anulia.reito@jucepe.pe.gov.br', phone: '(81) 99999-1111' },
-    { id: 2, name: 'Romelal Rivora', date: '16/05', day: 16, month: 4, department: 'RH', avatar: 'https://i.pravatar.cc/150?img=2', email: 'romelal.rivora@jucepe.pe.gov.br', phone: '(81) 99999-2222' },
-    { id: 3, name: 'Lienos Santana', date: '18/05', day: 18, month: 4, department: 'Administração', avatar: 'https://i.pravatar.cc/150?img=3', email: 'lienos.santana@jucepe.pe.gov.br', phone: '(81) 99999-3333' },
-    { id: 4, name: 'Jouseul Feira', date: '20/05', day: 20, month: 4, department: 'Comunicação', avatar: 'https://i.pravatar.cc/150?img=4', email: 'jouseul.feira@jucepe.pe.gov.br', phone: '(81) 99999-4444' },
+    { id: 1, name: 'Camila Ferreira', date: '15/05', day: 15, month: 4, department: 'Presidência', avatar: 'https://i.pravatar.cc/150?img=1', email: 'camila.ferreira@jucepe.pe.gov.br', phone: '(81) 99999-1111' },
+    { id: 2, name: 'Rafael Oliveira', date: '16/05', day: 16, month: 4, department: 'RH', avatar: 'https://i.pravatar.cc/150?img=2', email: 'rafael.oliveira@jucepe.pe.gov.br', phone: '(81) 99999-2222' },
+    { id: 3, name: 'Beatriz Andrade', date: '18/05', day: 18, month: 4, department: 'Administração', avatar: 'https://i.pravatar.cc/150?img=3', email: 'beatriz.andrade@jucepe.pe.gov.br', phone: '(81) 99999-3333' },
+    { id: 4, name: 'Lucas Barbosa', date: '20/05', day: 20, month: 4, department: 'Comunicação', avatar: 'https://i.pravatar.cc/150?img=4', email: 'lucas.barbosa@jucepe.pe.gov.br', phone: '(81) 99999-4444' },
     { id: 5, name: 'Maria Fernanda Costa', date: '22/05', day: 22, month: 4, department: 'TI', avatar: 'https://i.pravatar.cc/150?img=5', email: 'maria.costa@jucepe.pe.gov.br', phone: '(81) 99999-5555' },
     { id: 6, name: 'Carlos Eduardo Silva', date: '25/05', day: 25, month: 4, department: 'Financeiro', avatar: 'https://i.pravatar.cc/150?img=6', email: 'carlos.silva@jucepe.pe.gov.br', phone: '(81) 99999-6666' },
     { id: 7, name: 'Ana Paula Souza', date: '28/05', day: 28, month: 4, department: 'Jurídico', avatar: 'https://i.pravatar.cc/150?img=7', email: 'ana.souza@jucepe.pe.gov.br', phone: '(81) 99999-7777' },

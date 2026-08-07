@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Plus, Search, Filter, Edit2, Trash2, Eye, Calendar } from 'lucide-react';
+import { ROUTES } from '../../config/routes.js';
 
 const Publications = () => {
   const [filter, setFilter] = useState('all');
@@ -15,10 +17,10 @@ const Publications = () => {
   const publications = [
     {
       id: 1,
-      title: 'R$ 6,6 mm cobrar pero para para ho do RSD',
+      title: 'Novo plano de benefícios e diretrizes de RH para 2026',
       category: 'RH',
       categoryColor: 'bg-purple-100 text-purple-700',
-      date: '2024-05-15',
+      date: '2026-08-05',
       author: 'Maria Silva',
       views: 234,
       image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=250&fit=crop',
@@ -26,10 +28,10 @@ const Publications = () => {
     },
     {
       id: 2,
-      title: 'Entramadecenças para comparante espacie',
+      title: 'JUCEPE firma nova parceria institucional com o Governo de Pernambuco',
       category: 'Imprensa',
       categoryColor: 'bg-blue-100 text-blue-700',
-      date: '2024-05-14',
+      date: '2026-08-04',
       author: 'João Santos',
       views: 189,
       image: 'https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?w=400&h=250&fit=crop',
@@ -37,14 +39,25 @@ const Publications = () => {
     },
     {
       id: 3,
-      title: 'Precisões intensesestes notícias em Siit et',
+      title: 'Diretoria aprova novas diretrizes estratégicas para 2026',
       category: 'Presidência',
       categoryColor: 'bg-green-100 text-green-700',
-      date: '2024-05-13',
+      date: '2026-08-03',
       author: 'Ana Costa',
       views: 567,
       image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=250&fit=crop',
       status: 'draft'
+    },
+    {
+      id: 4,
+      title: 'Novos processos de licitação para 2026',
+      category: 'Administração',
+      categoryColor: 'bg-orange-100 text-orange-700',
+      date: '2026-08-02',
+      author: 'Ana Souza',
+      views: 98,
+      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop',
+      status: 'published'
     }
   ];
 
@@ -57,10 +70,10 @@ const Publications = () => {
           <p className="text-gray-500 mt-1">Gerencie notícias e comunicados oficiais</p>
         </div>
         
-        <button className="btn-primary flex items-center gap-2 self-start">
+        <Link to={ROUTES.publicar} className="btn-primary flex items-center gap-2 self-start">
           <Plus className="w-4 h-4" />
           Nova Publicação
-        </button>
+        </Link>
       </div>
 
       {/* Filters */}

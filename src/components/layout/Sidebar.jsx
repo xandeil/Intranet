@@ -22,6 +22,7 @@ import {
   Package,
   Monitor,
   Shield,
+  Users,
   X
 } from 'lucide-react';
 import { navigationSections } from '../../data/mockData.js';
@@ -30,7 +31,7 @@ import { ROUTES } from '../../config/routes.js';
 const iconMap = {
   Home, FileText, BookOpen, Mail, Settings, User, Gift, Calendar,
   Layers, BarChart3, Activity, FileBarChart, Clock, Timer,
-  Image, Package, Monitor, Shield
+  Image, Package, Monitor, Shield, Headphones, Users
 };
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -82,9 +83,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       <div className="h-16 flex items-center px-6 bg-jucepe-primary border-b border-blue-800 flex-shrink-0">
         <Link
           to={ROUTES.dashboard}
-          className="text-xl font-bold tracking-wider text-white hover:opacity-80 transition-opacity cursor-pointer"
+          className="inline-flex items-center bg-white rounded-lg px-3 py-1.5 hover:opacity-90 transition-opacity cursor-pointer"
         >
-          JUCEPE
+          <img src="/logo.png" alt="JUCEPE" className="h-6 w-auto" />
         </Link>
       </div>
 
@@ -145,10 +146,13 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           <p className="text-xs text-gray-400 mb-3">
             Dúvidas? Entre em contato com o TI
           </p>
-          <button className="w-full flex items-center gap-2 px-4 py-3 bg-jucepe-secondary hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-colors shadow-md">
+          <Link
+            to={ROUTES.chamados}
+            className="w-full flex items-center gap-2 px-4 py-3 bg-jucepe-secondary hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-colors shadow-md"
+          >
             <Headphones className="w-4 h-4" />
             Abrir chamado
-          </button>
+          </Link>
         </div>
       </div>
     </aside>

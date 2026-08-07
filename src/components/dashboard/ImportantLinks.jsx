@@ -12,7 +12,9 @@ import {
   TestTube,        // Adicione este para o Link de Homologação
   History          // Adicione este para o Portal Antigo
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { importantLinks } from '../../data/mockData.js';
+import { ROUTES } from '../../config/routes.js';
 
 const iconMap = {
   Globe, Building, FileCheck, Leaf, Mail, Server, Phone, Clock, FileSpreadsheet, TestTube, History
@@ -24,12 +26,15 @@ const ImportantLinks = () => {
       {/* Header */}
       <div className="flex items-center justify-between p-5 border-b border-gray-100">
         <h2 className="section-title">Links Importantes</h2>
-        <button className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1">
+        <Link
+          to={ROUTES.sistemas}
+          className="text-sm text-jucepe-secondary hover:text-jucepe-primary font-medium flex items-center gap-1"
+        >
           Ver todos
           <span className="w-4 h-4 rounded-full bg-jucepe-secondary text-white text-xs flex items-center justify-center">
             →
           </span>
-        </button>
+        </Link>
       </div>
 
       <div className="p-5">

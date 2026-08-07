@@ -19,6 +19,7 @@ import Presidencia from './pages/Rh&Comunicacao/Presidente.jsx';
 import Aniversariantes from './pages/Rh&Comunicacao/Aniversariantes.jsx';
 import Cronogramas from './pages/Rh&Comunicacao/Cronogramas.jsx';
 import Galeria from './pages/Rh&Comunicacao/Galeria.jsx';
+import QuemEQuem from './pages/Rh&Comunicacao/QuemEQuem.jsx';
 import Contato from './pages/Navegacao/Contato.jsx';
 import Publications from './pages/Navegacao/Publications.jsx';
 
@@ -34,6 +35,7 @@ import Documents from './pages/Navegacao/Documents.jsx';
 import SistemasLinks from './pages/SistemasInternos/SistemasLinks.jsx';
 import Monitoramento from './pages/SistemasInternos/Monitoramento.jsx';
 import PowerBI from './pages/SistemasInternos/PowerBI.jsx';
+import CentralChamados from './pages/SistemasInternos/CentralChamados.jsx';
 
 // --- Relatórios ---
 import Relatorios from './pages/relatorios/Relatorios.jsx';
@@ -130,12 +132,14 @@ function App() {
           <Route path={ROUTE_SEGMENTS.aniversariantes} element={<Aniversariantes />} />
           <Route path={ROUTE_SEGMENTS.cronogramas} element={<Cronogramas />} />
           <Route path={ROUTE_SEGMENTS.galeria} element={<Galeria />} />
+          <Route path={ROUTE_SEGMENTS.colaboradores} element={<QuemEQuem />} />
 
           {/* Sistemas Internos */}
           <Route path={ROUTE_SEGMENTS.sistemas} element={<SistemasLinks />} />
           <Route path={ROUTE_SEGMENTS.sistemasLinks} element={<SistemasLinks />} />
           <Route path={ROUTE_SEGMENTS.powerbi} element={<PowerBI />} />
           <Route path={ROUTE_SEGMENTS.monitoramento} element={<Monitoramento />} />
+          <Route path={ROUTE_SEGMENTS.chamados} element={<CentralChamados />} />
 
           {/* Relatórios */}
           <Route path={ROUTE_SEGMENTS.relatorios} element={<Relatorios />} />
