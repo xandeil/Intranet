@@ -112,37 +112,37 @@ const MensagemModal = () => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-jucepe-dark/40 backdrop-blur-md animate-in fade-in duration-300">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl relative border border-jucepe-light animate-in zoom-in-95 duration-300">
-        
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 bg-jucepe-dark/40 backdrop-blur-md overflow-y-auto animate-in fade-in duration-300">
+      <div className="bg-white w-full max-w-2xl max-h-[95vh] my-auto rounded-2xl shadow-2xl relative border border-jucepe-light animate-in zoom-in-95 duration-300 flex flex-col">
+
         {/* HEADER COM BORDAS ARREDONDADAS NO TOPO */}
-        <div className="bg-jucepe-dark p-6 flex items-center justify-between text-white rounded-t-2xl">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-white/10 rounded-lg">
+        <div className="bg-jucepe-dark p-4 sm:p-6 flex items-center justify-between gap-3 text-white rounded-t-2xl shrink-0">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="p-2 bg-white/10 rounded-lg shrink-0">
               {mensagens[currentMessageIndex].icon}
             </div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold tracking-tight">{mensagens[currentMessageIndex].titulo}</h2>
-              <Badge className="bg-white/20 text-white border-none">{mensagens[currentMessageIndex].tag}</Badge>
+            <div className="flex flex-wrap items-center gap-2 min-w-0">
+              <h2 className="text-lg sm:text-xl font-bold tracking-tight break-words">{mensagens[currentMessageIndex].titulo}</h2>
+              <Badge className="bg-white/20 text-white border-none shrink-0">{mensagens[currentMessageIndex].tag}</Badge>
             </div>
           </div>
-          <button onClick={handleClose} className="p-1 hover:bg-white/10 rounded-full transition-colors">
+          <button onClick={handleClose} className="p-1 hover:bg-white/10 rounded-full transition-colors shrink-0">
             <X size={24} />
           </button>
         </div>
 
-        <div className="p-8">
-          <div className="min-h-[220px] max-h-[50vh] overflow-y-auto px-2 custom-scrollbar">
+        <div className="p-4 sm:p-8 flex flex-col overflow-y-auto flex-1 min-h-0">
+          <div className="min-h-[220px] px-1 sm:px-2">
             {mensagens[currentMessageIndex].conteudo}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-gray-100">
+          <div className="mt-8 pt-6 border-t border-gray-100 shrink-0">
             <div className="flex flex-col gap-6">
               {/* CHECKBOX */}
               <div className="flex justify-center">
                 <label className="flex items-center gap-3 cursor-pointer group bg-jucepe-surface px-4 py-2 rounded-full border border-jucepe-light hover:border-jucepe-secondary transition-all">
-                  <input 
-                    type="checkbox" 
+                  <input
+                    type="checkbox"
                     className="w-5 h-5 rounded border-gray-300 text-jucepe-secondary focus:ring-jucepe-secondary cursor-pointer"
                     checked={naoMostrarHoje}
                     onChange={(e) => setNaoMostrarHoje(e.target.checked)}
@@ -154,9 +154,9 @@ const MensagemModal = () => {
               </div>
 
               {/* BOTÕES DE NAVEGAÇÃO USANDO SEU DESIGN SYSTEM */}
-              <div className="flex items-center justify-between">
-                <Button 
-                  variant="ghost" 
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <Button
+                  variant="ghost"
                   disabled={currentMessageIndex === 0}
                   onClick={() => setCurrentMessageIndex(prev => prev - 1)}
                   icon={ChevronLeft}
@@ -164,7 +164,7 @@ const MensagemModal = () => {
                   Anterior
                 </Button>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 order-first w-full justify-center sm:order-none sm:w-auto">
                   {mensagens.map((_, idx) => (
                     <div key={idx} className={`h-1.5 rounded-full transition-all ${idx === currentMessageIndex ? 'w-6 bg-jucepe-secondary' : 'w-2 bg-jucepe-light'}`} />
                   ))}
