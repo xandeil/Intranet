@@ -12,16 +12,20 @@ import {
 const router = Router();
 
 // --- Entrada do SSO --------------------------------------------------------
-// O portal faz um POST de formulário para cá. O GET existe como alternativa.
-// O nome do campo ainda precisa ser confirmado com o time do Login Único,
-// por isso aceitamos as duas grafias.
+// O portal faz um POST de formulário (campo "redirect_token") para
+// {urlDestino}/login_unico; com urlDestino = /auth/sso, chega em
+// /auth/sso/login_unico. /auth/sso, o GET e a grafia "redirectToken" ficam
+// como alternativas.
 async function receberSso(req, res) {
   const origem = { ...req.query, ...req.body };
-  const redirectToken = origem.redirectToken || origem.redirect_token;
+  const campo = origem.redirectToken ? 'redirectToken' : 'redirect_token';
+  const redirectToken = origem[campo];
 
   if (!redirectToken || typeof redirectToken !== 'string') {
+    console.warn(`[sso] requisição sem token (campos recebidos: ${Object.keys(origem).join(', ') || 'nenhum'})`);
     return res.redirect(303, '/login?erro=sso');
   }
+  console.info(`[sso] token recebido no campo "${campo}"`);
 
   try {
     const dados = await validarToken(redirectToken);
@@ -42,8 +46,9 @@ async function receberSso(req, res) {
   }
 }
 
-router.post('/auth/sso', receberSso);
-router.get('/auth/sso', receberSso);
+const rotasSso = ['/auth/sso', '/auth/sso/login_unico'];
+router.post(rotasSso, receberSso);
+router.get(rotasSso, receberSso);
 
 // --- API usada pelo React --------------------------------------------------
 router.get('/api/auth/me', async (req, res) => {

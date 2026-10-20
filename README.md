@@ -14,8 +14,10 @@ A Intranet está cadastrada no Login Único como um sistema de destino do tipo
 **TOKEN**. Ela não tem tela de usuário e senha própria.
 
 1. O usuário faz login no portal Login Único e clica no card **Intranet**.
-2. O portal gera um `redirectToken` (UUID de uso único, válido por ~30s) e faz
-   um POST de formulário para `https://<intranet>/auth/sso`.
+2. O portal gera um `redirect_token` (UUID de uso único, válido por ~30s) e faz
+   um POST de formulário, em nova aba, para `{urlDestino do card}/login_unico`.
+   Com o card apontando para `https://<intranet>/auth/sso`, o POST chega em
+   `/auth/sso/login_unico` com o campo `redirect_token`.
 3. O BFF chama `POST /portal/sso/validar-token` do Login Único, enviando o
    header `X-Api-Key` e o body `{ "redirectToken": "<uuid>" }`. A resposta traz
    `{ cpf, nome, email, tipo }`.
@@ -31,12 +33,16 @@ porque o nginx sozinho não consegue receber o POST do portal.
 
 | Método | Rota | Descrição |
 |---|---|---|
-| `POST` | `/auth/sso` | Recebe o `redirectToken` (ou `redirect_token`) do portal. Também aceita `GET ?redirectToken=` |
+| `POST` | `/auth/sso/login_unico` | Recebe o `redirect_token` do portal (é para cá que o portal envia) |
+| `POST` | `/auth/sso` | Alternativa: aceita `redirect_token` ou `redirectToken`. As duas rotas também aceitam `GET ?redirectToken=` |
 | `GET` | `/api/auth/me` | `200 { user }` com sessão válida, ou `401 { portalUrl }` |
 | `POST` | `/api/auth/logout` | Confere o header `Origin`, apaga o cookie e devolve `{ portalUrl }` |
 | `GET` | `/api/health` | Verificação de saúde |
 
 ### Perfis
+
+O CPF retornado pelo `validar-token` só é usado no servidor para definir o
+perfil: ele não vai para o cookie nem para o front.
 
 O `validar-token` ainda não devolve o perfil do usuário. Por enquanto, é admin
 quem tiver o e-mail ou o CPF na variável `ADMIN_USERS`. Os demais usuários

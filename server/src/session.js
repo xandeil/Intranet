@@ -25,9 +25,9 @@ function definirPerfil({ cpf, email }) {
 }
 
 // Monta o usuário da Intranet a partir da resposta do Login Único.
+// O CPF só é usado aqui, para definir o perfil: não vai para o JWT nem para o front.
 export function criarUsuario({ cpf, nome, email, tipo }) {
   return {
-    id: somenteDigitos(cpf),
     name: nome,
     email,
     tipo,
@@ -38,7 +38,7 @@ export function criarUsuario({ cpf, nome, email, tipo }) {
 export async function assinarSessao(usuario) {
   return new SignJWT({ user: usuario })
     .setProtectedHeader({ alg: 'HS256' })
-    .setSubject(usuario.id)
+    .setSubject(usuario.email)
     .setIssuedAt()
     .setExpirationTime(`${config.sessionTtl}s`)
     .sign(config.sessionSecret);
