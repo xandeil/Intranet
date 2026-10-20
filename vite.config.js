@@ -12,5 +12,10 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     allowedHosts: true,
+    // Em desenvolvimento, encaminha o login SSO e a API para o BFF (server/)
+    proxy: {
+      '/api/': { target: 'http://localhost:3001', xfwd: true },
+      '/auth/': { target: 'http://localhost:3001', xfwd: true },
+    },
   },
 })
