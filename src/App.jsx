@@ -53,6 +53,17 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+// Admin Route Component (usar dentro de uma ProtectedRoute)
+const AdminRoute = ({ children }) => {
+  const { hasPermission } = useAuth();
+
+  if (!hasPermission('admin')) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
+
 function App() {
   /* REATIVADO: Estado essencial para a Sidebar funcionar e não dar erro de função */
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1024);
@@ -112,8 +123,8 @@ function App() {
           <Route path="timesheet" element={<Timesheet />} />
 
           {/* Administração */}
-          <Route path="admin" element={<Admin />} />
-          <Route path="administracao/publicar" element={<Publicar />} />
+          <Route path="admin" element={<AdminRoute><Admin /></AdminRoute>} />
+          <Route path="administracao/publicar" element={<AdminRoute><Publicar /></AdminRoute>} />
         </Route>
 
         {/* Rota de Erro 404 */}

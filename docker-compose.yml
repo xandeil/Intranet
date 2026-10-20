@@ -4,4 +4,18 @@ services:
     container_name: jucepe-intranet
     ports:
       - "5172:80"
+    depends_on:
+      - bff
     restart: unless-stopped
+
+  # Backend (BFF) do login SSO. Sem porta exposta: só o nginx acessa,
+  # pela rede interna do compose (http://bff:3001).
+  bff:
+    build: ./server
+    container_name: jucepe-intranet-bff
+    env_file: server/.env
+    restart: unless-stopped
+    # Se o Login Único usar um certificado não confiável, coloque a CA em
+    # server/certs/ e defina NODE_EXTRA_CA_CERTS=/certs/ca.pem no server/.env
+    # volumes:
+    #   - ./server/certs:/certs:ro

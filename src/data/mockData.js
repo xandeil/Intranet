@@ -164,7 +164,7 @@ export const navigationSections = [
       { id: 'documentos', label: 'Documentos', icon: 'FileText', path: '/documentos' },
       { id: 'publicacoes', label: 'Publicações', icon: 'BookOpen', path: '/publicacoes' },
       { id: 'contato', label: 'Contato', icon: 'Mail', path: '/contato' },
-      { id: 'admin', label: 'Administração', icon: 'Settings', path: '/admin' }
+      { id: 'admin', label: 'Administração', icon: 'Settings', path: '/admin', permission: 'admin' }
     ]
   },
   {
