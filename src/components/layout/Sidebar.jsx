@@ -21,6 +21,7 @@ import {
   X
 } from 'lucide-react';
 import { navigationSections } from '../../data/mockData.js';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 const iconMap = {
   Home, FileText, BookOpen, Mail, Settings, User, Gift, Calendar,
@@ -29,6 +30,7 @@ const iconMap = {
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
+  const { hasPermission } = useAuth();
 
   // Fecha a sidebar automaticamente ao mudar de página no mobile
   useEffect(() => {
@@ -101,7 +103,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             {/* Section Items */}
             {expandedSections[section.title] && (
               <div className="mt-1 space-y-1">
-                {section.items.map((item) => {
+                {/* Itens com "permission" só aparecem para quem tem essa permissão */}
+                {section.items
+                  .filter((item) => !item.permission || hasPermission(item.permission))
+                  .map((item) => {
                   const IconComponent = iconMap[item.icon] || FileText;
                   const isActive = location.pathname === item.path ||
                     (item.path !== '/' && location.pathname.startsWith(item.path));

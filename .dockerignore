@@ -5,3 +5,9 @@ dist-ssr
 *.log
 .vscode
 .idea
+
+# Segredos e dependências do BFF
+**/.env
+**/.env.*
+!**/.env.example
+server/node_modules
